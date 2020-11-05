@@ -7,7 +7,7 @@ const Writtenwork = require("../models/Writtenwork");
 exports.getAllWrittenWorks = async (req, res) => {
     try {
         const writtenWorks = await Writtenwork.find();
-        res.status(200).json({ success: true, data: writtenWorks });
+        res.status(200).json({ success: true, count: writtenWorks.length, data: writtenWorks });
     }
     catch (err) {
         res.status(400).json({ success: false });
