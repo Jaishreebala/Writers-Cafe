@@ -5,7 +5,8 @@ const WrittenworkScema = new mongoose.Schema({
         type: String,
         required: [true, 'Please give your new written work a name'],
         trim: true,
-        maxlength: [50, 'Name has a limit of 50 characters maximum']
+        maxlength: [50, 'Name has a limit of 50 characters maximum'],
+        unique: [true, "Name already exists"]
     },
     slug: String,
     description: {
@@ -48,6 +49,9 @@ const WrittenworkScema = new mongoose.Schema({
     suicideOrTriggerWarning: {
         type: Boolean,
         default: false
+    },
+    content: {
+        type: String
     },
     createdAt: {
         type: Date,
