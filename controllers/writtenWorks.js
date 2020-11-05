@@ -72,6 +72,14 @@ exports.updateWrittenWorkById = async (req, res) => {
 // @route   DELETE | api/v1/writtenWorks/:id
 // @access  public
 
-exports.deleteWrittenWorkById = (req, res) => {
-    res.status(200).json({ success: true, msg: `Delete writtenWork with id = ${req.params.id}` });
+exports.deleteWrittenWorkById = async (req, res) => {
+    try {
+        const writtenWork = await Writtenwork.findByIdAndDelete(req.params.id);
+        if (!writtenWork)
+            return res.status(400).json({ success: false });
+        res.status(200).json({ success: true, data: {} });
+    }
+    catch (err) {
+        res.status(400).json({ success: false });
+    }
 }
