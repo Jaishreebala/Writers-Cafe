@@ -21,6 +21,9 @@ exports.getAllWrittenWorks = async (req, res) => {
 exports.getWrittenWorkById = async (req, res) => {
     try {
         const writtenWork = await Writtenwork.findById(req.params.id);
+        if (!writtenWork) {
+            return res.status(400).json({ success: false });
+        }
         res.status(200).json({ success: true, data: writtenWork });
     }
     catch (err) {
@@ -49,8 +52,20 @@ exports.createNewWrittenWork = async (req, res) => {
 // @route   PUT | api/v1/writtenWorks/:id
 // @access  private
 
-exports.updateWrittenWorkById = (req, res) => {
-    res.status(200).json({ success: true, msg: `Update writtenWork with id = ${req.params.id}` });
+exports.updateWrittenWorkById = async (req, res) => {
+    try {
+        const writtenWork = await Writtenwork.findByIdAndUpdate(req.params.id, req.body, {
+            new: true, runValidators: true
+        });
+        if (!writtenWork)
+            return res.status(400).json({ success: false });
+        res.status(200).json({ success: true, data: writtenWork });
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(400).json({ success: false });
+
+    }
 }
 
 // @desc    Delete Written Work By ID
