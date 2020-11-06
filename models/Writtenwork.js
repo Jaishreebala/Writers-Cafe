@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const slugify = require("slugify");
 const WrittenworkScema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,7 +20,7 @@ const WrittenworkScema = new mongoose.Schema({
         enum: ['Poetry', 'Short Story', 'Novel', 'Journal/Diary', 'Quotes']
     },
     genre: {
-        type: String,
+        type: [String],
         required: [true, 'Please choose the genre of your work.'],
         enum: ['Fantasy', 'Adventure', 'Romance', 'Contemporary', 'Dystopian', 'Mystery', 'Horror', 'Thriller', 'Paranormal', 'Historical fiction', 'Science Fiction', 'Memoir', 'Cooking', 'Art', 'Self-help / Personal', 'Development', 'Motivational', 'Health', 'History', 'Travel', 'Guide / How-to', 'Families & Relationships', 'Humor', 'Children’s', 'Other']
     },
@@ -59,4 +59,13 @@ const WrittenworkScema = new mongoose.Schema({
     }
 });
 
+// Convert Name to slug
+WrittenworkScema.pre("save", function (next) {
+    console.log("Slugify ran", this.name)
+
+    this.slug = slugify(this.name, {
+        lower: true
+    })
+    next();
+})
 module.exports = mongoose.model('WrittenWork', WrittenworkScema);
