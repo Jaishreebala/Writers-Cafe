@@ -12,6 +12,7 @@ A backend API for managing user's written works.
         * Limit number of results per page
         * Pagination
     * GET a Written Work by ID
+    * Private/Public Works feature
 - Create new written work
     * Authentication: Only logged in users can create a new written work.
     * Field validation using mongoose

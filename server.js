@@ -2,17 +2,30 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db")
 const colors = require("colors");
+const fileupload = require("express-fileupload");
 const errorHandler = require("./middleware/error");
+const path = require("path");
+const cookieparser = require('cookie-parser');
 
 dotenv.config({ path: './config/config.env' });
 const app = express();
+// Body Parser
 app.use(express.json());
+// set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+// Use cookie parser
+app.use(cookieparser());
 // Connect To Database
 connectDB();
 
+// Bring in express file upload
+app.use(fileupload());
+
 // Bring in writtenworks router
 const writtenWorks = require('./router/writtenWorks')
+const auth = require('./router/auth')
 app.use('/api/v1/writtenWork', writtenWorks);
+app.use('/api/v1/auth', auth);
 
 // Call error handler
 app.use(errorHandler);

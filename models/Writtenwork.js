@@ -6,7 +6,6 @@ const WrittenworkScema = new mongoose.Schema({
         required: [true, 'Please give your new written work a name.'],
         trim: true,
         maxlength: [50, 'Name has a limit of 50 characters maximum.'],
-        unique: [true, "Name already exists"]
     },
     slug: String,
     description: {
@@ -56,13 +55,16 @@ const WrittenworkScema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 
 // Convert Name to slug
 WrittenworkScema.pre("save", function (next) {
-    console.log("Slugify ran", this.name)
-
     this.slug = slugify(this.name, {
         lower: true
     })

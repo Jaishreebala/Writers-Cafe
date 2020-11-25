@@ -1,16 +1,21 @@
 const express = require('express');
-const { getAllWrittenWorks, getWrittenWorkById, createNewWrittenWork, updateWrittenWorkById, deleteWrittenWorkById } = require('../controllers/writtenWorks');
+const { getAllWrittenWorks, getWrittenWorkById, createNewWrittenWork, updateWrittenWorkById, deleteWrittenWorkById, uploadPhotoForWrittenWork } = require('../controllers/writtenWorks');
+const { protect } = require("../middleware/auth")
 const router = express.Router();
 
 router
     .route("/")
     .get(getAllWrittenWorks)
-    .post(createNewWrittenWork)
+    .post(protect, createNewWrittenWork)
 
 router
     .route("/:id")
     .get(getWrittenWorkById)
-    .put(updateWrittenWorkById)
-    .delete(deleteWrittenWorkById)
+    .put(protect, updateWrittenWorkById)
+    .delete(protect, deleteWrittenWorkById)
+
+router
+    .route("/:id/photo")
+    .put(protect, uploadPhotoForWrittenWork)
 
 module.exports = router;
