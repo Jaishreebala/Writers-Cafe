@@ -5,6 +5,7 @@ const WrittenworkScema = new mongoose.Schema({
         type: String,
         required: [true, 'Please give your new written work a name.'],
         trim: true,
+        unique: false,
         maxlength: [50, 'Name has a limit of 50 characters maximum.'],
     },
     slug: String,
