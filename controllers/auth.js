@@ -43,7 +43,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: user })
 })
 
-// @desc    Profile page of logged in user
+// @desc    Update details of logged in user
 // @route   PUT | api/v1/auth/me
 // @access  private
 
@@ -55,6 +55,9 @@ exports.updateMe = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: user })
 })
 
+// @desc    Update profile picture of logged in user
+// @route   PUT | api/v1/auth/photoUpload
+// @access  private
 
 exports.userPhotoUpload = asyncHandler(async (req, res, next) => {
     if (!req.files) {
@@ -76,6 +79,23 @@ exports.userPhotoUpload = asyncHandler(async (req, res, next) => {
         res.status(200).json({ success: true, data: req.files.file.name })
     })
 })
+
+// @desc    Forgot Password
+// @route   POST | api/v1/auth/forgotPassword
+// @access  public
+
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return next(new errorResponse(`User Does Not Exist`, 404));
+    }
+    const resetToken = await user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+    res.status(200).json({ success: true, resetToken })
+
+})
+
+
 const sendTokenResponse = (user, statusCode, res) => {
     const token = user.getJWTWebToken();
     let options = {
