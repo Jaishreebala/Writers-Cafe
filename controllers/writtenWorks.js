@@ -127,7 +127,7 @@ exports.uploadPhotoForWrittenWork = asyncHandler(async (req, res, next) => {
         return next(new errorResponse(`File size should be less than ${process.env.FILE_MAX_UPLOAD / 1000}KB`), 400)
     }
     req.files.file.name = `Photo_${req.params.id}${path.parse(req.files.file.name).ext}`;
-    req.files.file.mv(`.${process.env.FILE_UPLOAD_PATH}/${req.files.file.name}`, async err => {
+    req.files.file.mv(`.${process.env.FILE_UPLOAD_PATH}/writtenWorks/${req.files.file.name}`, async err => {
         if (err) {
             console.log(err);
             return next(new errorResponse(`Problem with file upload, try again`), 500)

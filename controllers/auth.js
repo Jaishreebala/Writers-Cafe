@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const errorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
+const path = require("path");
 
 // @desc    Register New User
 // @route   POST | api/v1/auth/register
@@ -42,6 +43,39 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: user })
 })
 
+// @desc    Profile page of logged in user
+// @route   PUT | api/v1/auth/me
+// @access  private
+
+exports.updateMe = asyncHandler(async (req, res, next) => {
+    const fieldsToUpdate = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email };
+    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+        new: true, runValidators: true
+    });
+    res.status(200).json({ success: true, data: user })
+})
+
+
+exports.userPhotoUpload = asyncHandler(async (req, res, next) => {
+    if (!req.files) {
+        return next(new errorResponse(`Please upload a file`))
+    }
+    if (!req.files.file.mimetype.startsWith("image")) {
+        return next(new errorResponse(`Please upload an image file`), 400)
+    }
+    if (req.files.file.size > process.env.FILE_MAX_UPLOAD) {
+        return next(new errorResponse(`File size should be less than ${process.env.FILE_MAX_UPLOAD / 1000}KB`), 400)
+    }
+    req.files.file.name = `Photo_${req.user.id}${path.parse(req.files.file.name).ext}`;
+    req.files.file.mv(`.${process.env.FILE_UPLOAD_PATH}/users/${req.files.file.name}`, async err => {
+        if (err) {
+            console.log(err);
+            return next(new errorResponse(`Problem with file upload, try again`), 500)
+        }
+        await User.findByIdAndUpdate(req.user.id, { photo: req.files.file.name });
+        res.status(200).json({ success: true, data: req.files.file.name })
+    })
+})
 const sendTokenResponse = (user, statusCode, res) => {
     const token = user.getJWTWebToken();
     let options = {
@@ -52,6 +86,5 @@ const sendTokenResponse = (user, statusCode, res) => {
     if (process.env.NODE_ENV === 'production') {
         options.secure = true
     }
-
     res.status(statusCode).cookie('token', token, options).json({ success: true, token })
 }
