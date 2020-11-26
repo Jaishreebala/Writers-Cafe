@@ -20,7 +20,7 @@ exports.getAllWrittenWorks = asyncHandler(async (req, res, next) => {
     queryStr = JSON.parse(queryStr);
     queryStr.view = 'public';
     // public
-    query = Writtenwork.find(queryStr);
+    query = Writtenwork.find(queryStr).populate({ path: 'author', select: 'firstName lastName' });
     if (req.query.select) {
         let fields = req.query.select.split(',').join(' ');
         query = query.select(fields);

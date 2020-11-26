@@ -22,10 +22,12 @@ connectDB();
 app.use(fileupload());
 
 // Bring in writtenworks router
-const writtenWorks = require('./router/writtenWorks')
-const auth = require('./router/auth')
+const writtenWorks = require('./router/writtenWorks');
+const auth = require('./router/auth');
+const comments = require('./router/comments');
 app.use('/api/v1/writtenWork', writtenWorks);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/comments', comments);
 
 // Call error handler
 app.use(errorHandler);

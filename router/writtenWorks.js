@@ -1,7 +1,10 @@
 const express = require('express');
 const { getAllWrittenWorks, getWrittenWorkById, createNewWrittenWork, updateWrittenWorkById, deleteWrittenWorkById, uploadPhotoForWrittenWork } = require('../controllers/writtenWorks');
-const { protect } = require("../middleware/auth")
+const { protect } = require("../middleware/auth");
 const router = express.Router();
+const comments = require('../router/comments');
+
+router.use("/:writtenworkID/comments", comments);
 
 router
     .route("/")

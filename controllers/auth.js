@@ -2,6 +2,9 @@ const User = require("../models/User");
 const errorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const path = require("path");
+const sendMail = require('../utils/sendmail');
+const crypto = require("crypto");
+
 
 // @desc    Register New User
 // @route   POST | api/v1/auth/register
@@ -91,8 +94,47 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     }
     const resetToken = await user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
+
+    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to \n\n ${resetURL}`;
+
+    try {
+        await sendMail({
+            email: user.email,
+            subject: 'Password Reset Token',
+            message
+        })
+    }
+    catch (err) {
+        console.log(err);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+
+        await user.save({ validateBeforeSave: false });
+        return next(new errorResponse('Email could not be sent', 500))
+    }
     res.status(200).json({ success: true, resetToken })
 
+})
+
+// @desc: Reset Password
+// @route: PUT /api/v1/auth/me
+// @access: Private
+exports.resetUserPassword = asyncHandler(async (req, res, next) => {
+    // Get hashed token
+    const resetTokenPassword = crypto.createHash('sha256').update(req.params.resetToken).digest('hex');
+    const user = await User.findOne({
+        resetPasswordToken: resetTokenPassword,
+        resetPasswordExpire: { $gt: Date.now() }
+    });
+    if (!user) {
+        return next(new errorResponse(`Invalid Token`, 400));
+    }
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+    sendTokenResponse(user, 200, res);
 })
 
 

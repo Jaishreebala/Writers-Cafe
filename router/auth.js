@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, getMe, updateMe, userPhotoUpload, forgotPassword } = require("../controllers/auth");
+const { registerUser, loginUser, getMe, updateMe, userPhotoUpload, resetUserPassword, forgotPassword } = require("../controllers/auth");
 const { protect } = require("../middleware/auth");
 const router = express.Router();
 
@@ -24,6 +24,9 @@ router
 router
     .route("/forgotPassword")
     .post(forgotPassword);
+
+router
+    .put('/resetpassword/:resetToken', resetUserPassword);
 
 
 module.exports = router;
