@@ -11,8 +11,8 @@ const crypto = require("crypto");
 // @access  public
 
 exports.registerUser = asyncHandler(async (req, res, next) => {
-    const { firstName, lastName, email, password } = req.body;
-    let user = await User.create({ firstName, lastName, email, password });
+    const { firstName, lastName, email, password, address } = req.body;
+    let user = await User.create({ firstName, lastName, email, password, address });
     sendTokenResponse(user, 200, res);
 })
 
