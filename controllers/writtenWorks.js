@@ -9,44 +9,7 @@ const path = require("path");
 // @access  public
 
 exports.getAllWrittenWorks = asyncHandler(async (req, res, next) => {
-    let query;
-    let reqQuery = { ...req.query };
-    let removeFields = ['select', 'sort', 'page', 'limit'];
-    removeFields.forEach(field => {
-        delete reqQuery[field];
-    });
-    let queryStr = JSON.stringify(reqQuery);
-    queryStr = queryStr.replace(/\b(gt|lt|gte|lte|in)\b/g, match => `$${match}`);
-    queryStr = JSON.parse(queryStr);
-    queryStr.view = 'public';
-    // public
-    query = Writtenwork.find(queryStr).populate({ path: 'author', select: 'firstName lastName' });
-    if (req.query.select) {
-        let fields = req.query.select.split(',').join(' ');
-        query = query.select(fields);
-    }
-    if (req.query.sort) {
-        let fields = req.query.sort.split(',').join(' ');
-        query = query.sort(fields);
-    } else {
-        query = query.sort('-createdAt');
-    }
-    let page = parseInt(req.query.page, 10) || 1;
-    let limit = parseInt(req.query.limit, 10) || 3;
-    let totalResults = await Writtenwork.countDocuments();
-    let pagination = {};
-    let startIndex = (page - 1) * limit;
-    let endIndex = page * limit;
-    if (endIndex < totalResults) {
-        pagination.next = page + 1;
-    }
-    if (startIndex > 0) {
-        pagination.prev = page - 1;
-    }
-    query = query.skip(startIndex).limit(limit);
-    const writtenWorks = await query;
-
-    res.status(200).json({ success: true, pagination, count: writtenWorks.length, data: writtenWorks });
+    res.status(200).json(res.advancedResults)
 })
 
 // @desc    Get Written Work By ID
@@ -100,7 +63,7 @@ exports.deleteWrittenWorkById = asyncHandler(async (req, res, next) => {
     if (req.user.id != writtenWork.author.toString()) {
         return next(new errorResponse(`User ${req.user.id} does not have permission to edit this work.`, 401));
     }
-    await Writtenwork.findByIdAndDelete(req.params.id);
+    await writtenWork.remove();
 
     res.status(200).json({ success: true, data: {} });
 });

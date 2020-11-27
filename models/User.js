@@ -37,7 +37,19 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
+
+// Reverse Populate With Virtuals
+UserSchema.virtual('writtenworks', {
+    ref: 'Writtenwork',
+    localField: '_id',
+    foreignField: 'author',
+    justOne: false
+})
+
 UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         next();

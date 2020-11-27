@@ -62,7 +62,25 @@ const WrittenworkScema = new mongoose.Schema({
         ref: 'User',
         required: true
     }
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
+
+// Reverse Populate With Virtuals
+WrittenworkScema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'writtenWork',
+    justOne: false
+})
+
+// Cascade Delete Comments When the written work is deleted
+WrittenworkScema.pre('remove', async function (next) {
+    console.log(`Comments being deleted from ${this.name}`);
+    await this.model('Comment').deleteMany({ writtenWork: this._id });
+    next();
+})
 
 // Convert Name to slug
 WrittenworkScema.pre("save", function (next) {
@@ -71,4 +89,5 @@ WrittenworkScema.pre("save", function (next) {
     })
     next();
 })
+
 module.exports = mongoose.model('WrittenWork', WrittenworkScema);

@@ -4,7 +4,6 @@ const CommentSchema = new mongoose.Schema({
 
     comment: {
         type: String,
-        required: [true, "Please add some text description"]
     },
     rating: {
         type: Number,
@@ -27,33 +26,7 @@ const CommentSchema = new mongoose.Schema({
         required: true
     }
 });
-CommentSchema.statics.getAverageRating = async function (bootcampId) {
-    const obj = await this.aggregate([
-        {
-            $match: { writtenWork: Writtenwork }
-        },
-        {
-            $group: {
-                _id: '$writtenWork',
-                averageRating: { $avg: '$rating' }
-            }
-        }
-    ]);
-    try {
-        await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
-            averageRating: Math.ceil(obj[0].averageRating / 10) * 10
-        })
-    } catch (err) {
-        console.error(err)
-    }
-}
-// Call getavgcost after save
-ReviewSchema.post("save", function () {
-    this.constructor.getAverageRating(this.bootcamp);
-});
-// Call getavgcost before remove
-ReviewSchema.pre("remove", function () {
-    this.constructor.getAverageRating(this.bootcamp);
-});
 
-module.exports = mongoose.model('Review', ReviewSchema);
+
+
+module.exports = mongoose.model('Comment', CommentSchema);

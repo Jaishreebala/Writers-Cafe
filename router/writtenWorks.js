@@ -3,12 +3,14 @@ const { getAllWrittenWorks, getWrittenWorkById, createNewWrittenWork, updateWrit
 const { protect } = require("../middleware/auth");
 const router = express.Router();
 const comments = require('../router/comments');
+const advancedResults = require("../middleware/advancedResults");
+const Writtenwork = require("../models/Writtenwork");
 
-router.use("/:writtenworkID/comments", comments);
+router.use("/:writtenworkId/comments", comments);
 
 router
     .route("/")
-    .get(getAllWrittenWorks)
+    .get(advancedResults(Writtenwork, { path: 'author', select: 'firstName lastName' }, { path: 'comments', select: 'comment' }), getAllWrittenWorks)
     .post(protect, createNewWrittenWork)
 
 router
