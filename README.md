@@ -26,15 +26,11 @@ A backend API for managing user's written works.
 
 ### Ratings & Comments
 - GET all ratings for a specific written work
-- GET all ratings (advancd filtering features)
-- GET a single rating by ID
 - POST (add) rating
     * Authenticate that only logged in users can create a rating
-    * The creator of story can not add ratings to their own story
 - UPDATE rating
     * Only creator of rating can update rating
-- DELETE rating
-    * Only creator can delete their own rating
+
 
 ### Users & Authentication
 - Authentication using JWT & cookies
@@ -58,3 +54,9 @@ A backend API for managing user's written works.
 - Update user info
   * Authenticated user only
   * Separate route to update password
+- GET all Users: Advanced Features:
+        * Display Specific Fields (including their work)
+        * Filter results (by firstname & lastname)
+        * Limit number of results per page
+        * Pagination
+- Find authors near you
