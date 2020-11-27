@@ -20,11 +20,11 @@ A backend API for managing user's written works.
     * Only owner can update their written work
     * Field validation using mongoose 
 - Delete written work
-    * Only owner can update their written work
+    * Only owner can delete their written work
 - Upload cover photo for the written work
 - Calculate average rating for the specific written work.
 
-### Ratings
+### Ratings & Comments
 - GET all ratings for a specific written work
 - GET all ratings (advancd filtering features)
 - GET a single rating by ID
@@ -40,7 +40,7 @@ A backend API for managing user's written works.
 - Authentication using JWT & cookies
   * JWT and cookie will expire in 30 days
 - User registration
-  * Once registered, a token will be sent along with a cookie (token = xxx)
+  * Once registered, a token will be sent along with a cookie
   * Passwords must be hashed
 - User login
   * User can login with email and password
