@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Writtenwork = require("../models/Writtenwork");
 const jwt = require('jsonwebtoken');
 // const crypto = require("crypto");
 const UserSchema = new mongoose.Schema({
@@ -41,7 +42,6 @@ const UserSchema = new mongoose.Schema({
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
-
 // Reverse Populate With Virtuals
 UserSchema.virtual('writtenworks', {
     ref: 'Writtenwork',
@@ -49,6 +49,8 @@ UserSchema.virtual('writtenworks', {
     foreignField: 'author',
     justOne: false
 })
+
+
 
 UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {

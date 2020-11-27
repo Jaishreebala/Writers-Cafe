@@ -25,9 +25,11 @@ app.use(fileupload());
 const writtenWorks = require('./router/writtenWorks');
 const auth = require('./router/auth');
 const comments = require('./router/comments');
+const users = require('./router/users');
 app.use('/api/v1/writtenWork', writtenWorks);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/comments', comments);
+app.use('/api/v1/users', users);
 
 // Call error handler
 app.use(errorHandler);

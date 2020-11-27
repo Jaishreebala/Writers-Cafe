@@ -33,11 +33,11 @@ const WrittenworkScema = new mongoose.Schema({
         type: String,
         default: 'placeholder-story.svg'
     },
-    averageRating: {
-        type: Number,
-        min: [1, 'Rating must be at least 1'],
-        max: [10, 'Rating must can not be more than 10']
-    },
+    // averageRating: {
+    //     type: Number,
+    //     min: [1, 'Rating must be at least 1'],
+    //     max: [10, 'Rating must can not be more than 10']
+    // },
     nsfwContent: {
         type: Boolean,
         required: [true, 'Please state whether your work contains NSFW content or not.']
@@ -90,4 +90,4 @@ WrittenworkScema.pre("save", function (next) {
     next();
 })
 
-module.exports = mongoose.model('WrittenWork', WrittenworkScema);
+module.exports = mongoose.model('Writtenwork', WrittenworkScema);
