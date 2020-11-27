@@ -27,6 +27,30 @@ const CommentSchema = new mongoose.Schema({
     }
 });
 
+CommentSchema.statics.getAverageRating = async function (writtenWorkId) {
+    const avgPipeline = await this.aggregate([
+        { $match: { writtenWork: writtenWorkId } },
+        {
+            $group: {
+                _id: '$writtenWork',
+                averageRating: { $avg: '$rating' }
+            }
+        }
+    ])
+
+    try {
+        await this.model('Writtenwork').findByIdAndUpdate(writtenWorkId, {
+            averageRating: Math.round(avgPipeline[0].averageRating * 10) / 10
+        })
+    } catch (err) {
+        console.log(err);
+    }
+    console.log(avgPipeline);
+}
+
+CommentSchema.post('save', function () {
+    this.constructor.getAverageRating(this.writtenWork);
+})
 
 
 module.exports = mongoose.model('Comment', CommentSchema);

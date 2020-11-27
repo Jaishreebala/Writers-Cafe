@@ -33,11 +33,9 @@ const WrittenworkScema = new mongoose.Schema({
         type: String,
         default: 'placeholder-story.svg'
     },
-    // averageRating: {
-    //     type: Number,
-    //     min: [1, 'Rating must be at least 1'],
-    //     max: [10, 'Rating must can not be more than 10']
-    // },
+    averageRating: {
+        type: Number
+    },
     nsfwContent: {
         type: Boolean,
         required: [true, 'Please state whether your work contains NSFW content or not.']
@@ -74,6 +72,7 @@ WrittenworkScema.virtual('comments', {
     foreignField: 'writtenWork',
     justOne: false
 })
+
 
 // Cascade Delete Comments When the written work is deleted
 WrittenworkScema.pre('remove', async function (next) {

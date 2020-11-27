@@ -74,7 +74,6 @@ UserSchema.virtual('writtenworks', {
 
 UserSchema.pre('save', async function (next) {
     if (this.isModified('address')) {
-        console.log("add addreess...")
         const loc = await geocoder.geocode(this.address);
         this.location = {
             type: 'Point',
