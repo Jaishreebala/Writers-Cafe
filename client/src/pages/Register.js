@@ -72,7 +72,6 @@ function Register() {
                     </span>
                     </label>
                 </div>
-                <div className="links">Forgot Password?</div>
                 <button onClick={loginHandler} className="button">Register</button>
                 <div className="links borderTop">Already Have An Accout? <b>
                     <Link to="/login">Log In</Link>

@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react'
 import Error from '../components/Error';
+import Messages from '../components/Messages';
 import { Link } from 'react-router-dom'
 import logoNoBg from '../images/logoNoBg.svg';
 function Login() {
     const [errors, setErrors] = useState("");
+    const [message, setMessage] = useState("");
     const inputEmail = useRef();
     const inputPassword = useRef();
     const loginHandler = async (e) => {
@@ -29,6 +31,35 @@ function Login() {
                 setErrors(data.error);
             }
 
+            console.log(errors)
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+    const forgotPasswordHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("/api/v1/auth/forgotpassword", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: inputEmail.current.value
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            const data = await response.json();
+            console.log(data.success)
+            if (data.success) {
+                setMessage("A reset password link has been successfully sent to your email account.");
+                setErrors("")
+                console.log(message)
+            }
+            else {
+                setMessage("")
+                setErrors(data.error);
+            }
             console.log(errors)
         } catch (err) {
             console.log(err)
@@ -71,7 +102,8 @@ function Login() {
                     </span>
                     </label>
                 </div>
-                <div className="links">Forgot Password?</div>
+                <Messages message={message} />
+                <div onClick={forgotPasswordHandler} className="links">Forgot Password?</div>
                 <button onClick={loginHandler} className="button">Login</button>
                 {/* <button onClick={createWrittenWorkHandler} className="button">Login</button> */}
                 <div className="links borderTop">Don't Have An Accout? <b>

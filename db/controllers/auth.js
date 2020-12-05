@@ -107,8 +107,9 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     const resetToken = await user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
-    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to \n\n ${resetURL}`;
+    // const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
+    const resetURL = `http://localhost:3000/resetpassword/${resetToken}`;
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Below is the link for resetting the password to your Writer's Cafe account. \n\n${resetURL}`;
 
     try {
         await sendMail({

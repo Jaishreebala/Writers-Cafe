@@ -17,9 +17,16 @@ button, input{
 .error{
     color: #E84E4F;
 }
+.messages{
+    background-color: rgba(255,255,255, 0.8);
+    border-radius: 6px;
+    color: #7F66C5;
+    margin: 1rem 0;
+}
 a{
     text-decoration: none;
     color: inherit;
 }
+
 @import "./login";
 @import "./nav";

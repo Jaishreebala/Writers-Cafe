@@ -5,6 +5,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Read from './pages/Read'
+
+import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
 function App() {
   const location = useLocation();
@@ -25,6 +27,9 @@ function App() {
           </Route>
           <Route path="/register" exact>
             <Register />
+          </Route>
+          <Route path="/resetpassword/:resettoken" exact>
+            <Resetpassword />
           </Route>
         </Switch>
       </Router>
