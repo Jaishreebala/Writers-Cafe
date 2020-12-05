@@ -36,7 +36,40 @@ function Login() {
         }
 
     }
-
+    const createWrittenWorkHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("api/v1/auth/me", {
+                method: "GET",
+                // body: JSON.stringify({
+                //     name: "Benny lnad",
+                //     description: "This is a story of one sad city, all alone in a devastated, damaged world, trying to build itself over again",
+                //     workType: "Novel",
+                //     genre: [
+                //         "Dystopian",
+                //         "Fantasy"
+                //     ],
+                //     view: "public",
+                //     nsfwContent: true,
+                //     violence: true,
+                //     suicideOrTriggerWarning: true,
+                // }),
+                // headers: {
+                //     "Content-type": "application/json; charset=UTF-8"
+                // }
+            })
+            const data = await response.json();
+            console.log(data)
+            if (data.success) {
+                setErrors("");
+            }
+            else {
+                setErrors(data.error);
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <div className="login">
             <img src={logoNoBg} alt="Main Logo" />
@@ -59,6 +92,7 @@ function Login() {
                 </div>
                 <div className="links">Forgot Password?</div>
                 <button onClick={loginHandler} className="button">Login</button>
+                <button onClick={createWrittenWorkHandler} className="button">Login</button>
                 <div className="links borderTop">Don't Have An Accout? <b>
                     <a>Sign Up</a>
                 </b></div>
