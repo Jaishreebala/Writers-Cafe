@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import './styles/app.scss'
 import Login from './pages/Login'
@@ -10,26 +10,26 @@ import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
 function App() {
   const location = useLocation();
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
-      <Nav />
+      <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Router>
         <Switch location={location} key={location.pathname}>
-          <Route path="/" exact component={Home} />
-          {/* <Home />
-          </Route> */}
+          <Route path="/" exact >
+            <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          </Route>
           <Route path="/read" exact>
-            <Read />
+            <Read isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/login" exact>
-            <Login />
+            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/register" exact>
-            <Register />
+            <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/resetpassword/:resettoken" exact>
-            <Resetpassword />
+            <Resetpassword isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </Route>
         </Switch>
       </Router>

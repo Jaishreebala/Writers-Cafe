@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Error from '../components/Error';
 import { Link } from 'react-router-dom';
 import logoNoBg from '../images/logoNoBg.svg';
-function Register() {
+function Register({ isLoggedIn, setIsLoggedIn }) {
     const [errors, setErrors] = useState("");
     const inputEmail = useRef();
     const inputPassword = useRef();
@@ -24,15 +24,14 @@ function Register() {
                 }
             })
             const data = await response.json();
-            console.log(data.success)
             if (data.success) {
                 setErrors("");
-                console.log("Logging in...")
+                setIsLoggedIn(true);
             }
             else {
+                setIsLoggedIn(false);
                 setErrors(data.error);
             }
-            console.log(errors)
         } catch (err) {
             console.log(err)
         }
@@ -72,7 +71,7 @@ function Register() {
                     </span>
                     </label>
                 </div>
-                <button onClick={loginHandler} className="button">Register</button>
+                <button onClick={loginHandler} className="button marginTop">Register</button>
                 <div className="links borderTop">Already Have An Accout? <b>
                     <Link to="/login">Log In</Link>
                     {/* <a href="/login">Log In</a> */}

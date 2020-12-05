@@ -3,7 +3,7 @@ import Error from '../components/Error';
 import Messages from '../components/Messages';
 import { Link } from 'react-router-dom'
 import logoNoBg from '../images/logoNoBg.svg';
-function Login() {
+function Login({ setIsLoggedIn }) {
     const [errors, setErrors] = useState("");
     const [message, setMessage] = useState("");
     const inputEmail = useRef();
@@ -22,16 +22,14 @@ function Login() {
                 }
             })
             const data = await response.json();
-            console.log(data.success)
             if (data.success) {
                 setErrors("");
-                console.log("Logging in...")
+                setIsLoggedIn(true);
             }
             else {
+                setIsLoggedIn(false);
                 setErrors(data.error);
             }
-
-            console.log(errors)
         } catch (err) {
             console.log(err)
         }
@@ -39,6 +37,7 @@ function Login() {
     }
     const forgotPasswordHandler = async (e) => {
         e.preventDefault();
+        setIsLoggedIn(false);
         try {
             const response = await fetch("/api/v1/auth/forgotpassword", {
                 method: "POST",
@@ -54,7 +53,6 @@ function Login() {
             if (data.success) {
                 setMessage("A reset password link has been successfully sent to your email account.");
                 setErrors("")
-                console.log(message)
             }
             else {
                 setMessage("")

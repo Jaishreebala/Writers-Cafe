@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import logoNoBg from '../images/logoNoBg.svg';
 import { useParams } from 'react-router';
 
-function Resetpassword() {
+function Resetpassword({ isLoggedIn, setIsLoggedIn }) {
     const { resettoken } = useParams();
     const [errors, setErrors] = useState("");
     const inputPassword = useRef();
@@ -24,12 +24,13 @@ function Resetpassword() {
             console.log(data.success)
             if (data.success) {
                 setErrors("");
+                setIsLoggedIn(true);
                 console.log("Logging in...")
             }
             else {
+                setIsLoggedIn(false);
                 setErrors(data.error);
             }
-            console.log(errors)
         } catch (err) {
             console.log(err)
         }
