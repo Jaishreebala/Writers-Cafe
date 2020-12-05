@@ -1,0 +1,94 @@
+.login{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    --formelement-height: 70px;
+    --keyColor: #fff;
+    text-align: center;
+    color: #fff;
+    img{
+        height: 100vh;
+        width: 50%;
+    }
+    form{
+        width: 50%;
+        padding: 3rem;
+    }
+    .searchInput{
+        color: #ccc;
+        position: relative;
+        overflow: hidden;
+        height: var(--formelement-height);
+    }
+    .searchInput input {
+        width: 100%;
+        height: 100%;
+        color: #ccc;
+        padding-top: 20px;
+        border: none;
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+    .searchInput label {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: #ccc 1px solid;
+    }
+    .searchInput label::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border-bottom: 3px solid var(--keyColor);
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+    .content-name {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+    .searchInput input:focus {
+        outline: none;
+    }
+    .searchInput input:focus + .label-name .content-name,
+    .searchInput input:valid + .label-name .content-name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--keyColor);
+    }
+    .searchInput input:focus + .label-name::after,
+    .searchInput input:valid + .label-name::after {
+      transform: translateX(0%);
+    }
+    .links{
+        color: #fff;
+        padding: calc(var(--formelement-height) / 4) 0;
+        cursor: pointer;
+    }
+    .button{
+        background-color: #fff;
+        color: #7F66C5;
+        padding: 0.75rem 4rem;
+        border-radius: 2rem;
+        width: auto;
+        margin-bottom: calc(var(--formelement-height) / 4);
+        cursor: pointer;
+    }
+    .borderTop{
+        border-top: #fff solid 1px;
+        padding-bottom: calc(var(--formelement-height) / 4);
+
+    }
+}

@@ -1,18 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db")
+const connectDB = require("./db/config/db")
 const colors = require("colors");
 const fileupload = require("express-fileupload");
-const errorHandler = require("./middleware/error");
+const errorHandler = require("./db/middleware/error");
 const path = require("path");
 const cookieparser = require('cookie-parser');
 
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: './db/config/config.env' });
 const app = express();
 // Body Parser
 app.use(express.json());
 // set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+console.log(path.join(__dirname, 'db/public'))
+app.use(express.static(path.join(__dirname, 'db/public')));
 // Use cookie parser
 app.use(cookieparser());
 // Connect To Database
@@ -22,10 +23,10 @@ connectDB();
 app.use(fileupload());
 
 // Bring in writtenworks router
-const writtenWorks = require('./router/writtenWorks');
-const auth = require('./router/auth');
-const comments = require('./router/comments');
-const users = require('./router/users');
+const writtenWorks = require('./db/router/writtenWorks');
+const auth = require('./db/router/auth');
+const comments = require('./db/router/comments');
+const users = require('./db/router/users');
 app.use('/api/v1/writtenWork', writtenWorks);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/comments', comments);

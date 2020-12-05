@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    background: linear-gradient(65.93deg, #7F66C5 34.03%, #50D5FF 93.12%)
+}
+button, input{
+    border: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+}
+.error{
+    color: #E84E4F;
+}
+
+@import "./login"
