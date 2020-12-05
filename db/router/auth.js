@@ -30,7 +30,8 @@ router
     .post(forgotPassword);
 
 router
-    .put('/resetpassword/:resetToken', resetUserPassword);
+    .put('/resetpassword/:resetToken', resetUserPassword),
+    // .get('/resetpassword/:resetToken', resetUserPassword),
 
 
-module.exports = router;
+    module.exports = router;

@@ -17,5 +17,9 @@ button, input{
 .error{
     color: #E84E4F;
 }
-
-@import "./login"
+a{
+    text-decoration: none;
+    color: inherit;
+}
+@import "./login";
+@import "./nav";

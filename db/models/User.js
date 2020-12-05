@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
         minlength: 6,
         select: false,
     },
-    address: String,
+    address: { type: String, default: "" },
     photo: {
         type: String,
         default: 'placeholder-profile.svg'
@@ -73,19 +73,21 @@ UserSchema.virtual('writtenworks', {
 
 
 UserSchema.pre('save', async function (next) {
-    if (this.isModified('address')) {
-        const loc = await geocoder.geocode(this.address);
-        this.location = {
-            type: 'Point',
-            coordinates: [loc[0].longitude, loc[0].latitude],
-            formattedAddress: loc[0].formattedAddress,
-            street: loc[0].streetName,
-            city: loc[0].city,
-            state: loc[0].stateCode,
-            zipcode: loc[0].zipcode,
-            country: loc[0].countryCode
+    if (this.address !== "") {
+        if (this.isModified('address')) {
+            const loc = await geocoder.geocode(this.address);
+            this.location = {
+                type: 'Point',
+                coordinates: [loc[0].longitude, loc[0].latitude],
+                formattedAddress: loc[0].formattedAddress,
+                street: loc[0].streetName,
+                city: loc[0].city,
+                state: loc[0].stateCode,
+                zipcode: loc[0].zipcode,
+                country: loc[0].countryCode
+            }
+            this.address = undefined;
         }
-        this.address = undefined;
     }
     if (!this.isModified('password')) {
         next();
