@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import './styles/app.scss'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Read from './pages/Read'
+import Profile from './pages/Profile'
 
 import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
@@ -14,25 +15,26 @@ function App() {
   return (
     <div className="App">
       <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <Router>
-        <Switch location={location} key={location.pathname}>
-          <Route path="/" exact >
-            <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          </Route>
-          <Route path="/read" exact>
-            <Read isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          </Route>
-          <Route path="/login" exact>
-            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          </Route>
-          <Route path="/register" exact>
-            <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          </Route>
-          <Route path="/resetpassword/:resettoken" exact>
-            <Resetpassword isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          </Route>
-        </Switch>
-      </Router>
+      <Switch location={location} key={location.pathname}>
+        <Route path="/" exact >
+          <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/read" exact>
+          <Read isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/profile" exact>
+          <Profile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/login" exact>
+          <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/register" exact>
+          <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/resetpassword/:resettoken" exact>
+          <Resetpassword isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+      </Switch>
     </div>
   );
 }

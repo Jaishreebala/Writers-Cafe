@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Error from '../components/Error';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logoNoBg from '../images/logoNoBg.svg';
 function Register({ isLoggedIn, setIsLoggedIn }) {
     const [errors, setErrors] = useState("");
@@ -39,6 +39,7 @@ function Register({ isLoggedIn, setIsLoggedIn }) {
 
     return (
         <div className="login">
+            {isLoggedIn ? <Redirect to="/profile" /> : ""}
             <img src={logoNoBg} alt="Main Logo" />
             <form className="login-form">
                 <h1>Create Your Writer’s Cafe Account</h1>

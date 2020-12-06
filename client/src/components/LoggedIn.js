@@ -1,18 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-function LoggedIn({ location, setIsLoggedIn }) {
+function LoggedIn({ isLoggedIn, location, setIsLoggedIn }) {
     const logOutHandler = async () => {
         {
             try {
-                const response = await fetch("api/v1/auth/logout")
+                const response = await fetch("/api/v1/auth/logout")
+                console.log(response);
                 const data = await response.json();
-                console.log(data)
                 if (data.success) {
                     setIsLoggedIn(false);
                 }
                 else {
-                    console.log(data.error)
+                    console.log(data)
                 }
             } catch (err) {
                 console.log(err)
@@ -21,9 +21,10 @@ function LoggedIn({ location, setIsLoggedIn }) {
     }
     return (
         <ul>
+            {console.log(isLoggedIn)}
             <li className={location.pathname === "/read" ? "selected" : ""}><Link to="/read">Read</Link></li>
-            <li className={location.pathname === "/login" ? "selected" : ""}><Link to="/login">Profile</Link></li>
-            <li className={location.pathname === "/register" ? "selected" : ""} onClick={logOutHandler}>Logout</li>
+            <li className={location.pathname === "/profile" ? "selected" : ""}><Link to="/profile">Profile</Link></li>
+            <li className={location.pathname === "/logout" ? "selected" : ""} onClick={logOutHandler}>Logout</li>
         </ul>
     )
 }

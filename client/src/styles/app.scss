@@ -27,6 +27,17 @@ a{
     text-decoration: none;
     color: inherit;
 }
+.tagsArea{
+    display: flex;
+}
 
+.tags{
+    background-color: #66C486;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem;
+    margin: 0.5rem;
+}
 @import "./login";
 @import "./nav";
+@import "./card";

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Error from '../components/Error';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import logoNoBg from '../images/logoNoBg.svg';
 import { useParams } from 'react-router';
 
@@ -39,6 +39,7 @@ function Resetpassword({ isLoggedIn, setIsLoggedIn }) {
     console.log(resettoken)
     return (
         <div className="login">
+            {isLoggedIn ? <Redirect to="/profile" /> : ""}
             <img src={logoNoBg} alt="Main Logo" />
             <form className="login-form">
                 <h1>Reset Account Password</h1>

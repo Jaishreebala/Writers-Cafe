@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import Error from '../components/Error';
 import Messages from '../components/Messages';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import logoNoBg from '../images/logoNoBg.svg';
-function Login({ setIsLoggedIn }) {
+
+function Login({ isLoggedIn, setIsLoggedIn }) {
     const [errors, setErrors] = useState("");
     const [message, setMessage] = useState("");
     const inputEmail = useRef();
@@ -82,6 +83,8 @@ function Login({ setIsLoggedIn }) {
     // }
     return (
         <div className="login">
+            {isLoggedIn ? <Redirect to="/profile" /> : ""}
+            {console.log(isLoggedIn)}
             <img src={logoNoBg} alt="Main Logo" />
             <form className="login-form">
                 <h1>Login To Your Writer’s Cafe Account</h1>
