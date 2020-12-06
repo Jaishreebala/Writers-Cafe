@@ -65,22 +65,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         }
 
     }
-    // const createWrittenWorkHandler = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await fetch("api/v1/auth/me")
-    //         const data = await response.json();
-    //         console.log(data)
-    //         if (data.success) {
-    //             setErrors("");
-    //         }
-    //         else {
-    //             setErrors(data.error);
-    //         }
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
+
     return (
         <div className="login">
             {isLoggedIn ? <Redirect to="/profile" /> : ""}

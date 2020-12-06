@@ -29,6 +29,7 @@ a{
 }
 .tagsArea{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .tags{
@@ -38,6 +39,14 @@ a{
     padding: 0.1rem 0.5rem;
     margin: 0.5rem;
 }
+.warning-tag{
+    border: #E84E4F solid 1px;
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem;
+    margin: 0.5rem;
+    color: #E84E4F;
+}
 @import "./login";
 @import "./nav";
 @import "./card";
+@import "./dropdown";

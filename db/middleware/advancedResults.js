@@ -5,7 +5,13 @@ const advancedResults = (model, populate, populateAgain) => async (req, res, nex
     removeFields.forEach(field => {
         delete reqQuery[field];
     });
-    let queryStr = JSON.stringify(reqQuery);
+    let queryStr = reqQuery;
+    let keys = Object.keys(queryStr)
+        .filter(key => queryStr[key].in)
+    keys.forEach(key => {
+        queryStr[key].in = queryStr[key].in.split(" ");
+    })
+    queryStr = JSON.stringify(queryStr);
     queryStr = queryStr.replace(/\b(gt|lt|gte|lte|in)\b/g, match => `$${match}`);
     queryStr = JSON.parse(queryStr);
     if (model == 'Writtenwork') {
@@ -30,7 +36,7 @@ const advancedResults = (model, populate, populateAgain) => async (req, res, nex
         query = query.sort('-createdAt');
     }
     let page = parseInt(req.query.page, 10) || 1;
-    let limit = parseInt(req.query.limit, 10) || 3;
+    let limit = parseInt(req.query.limit, 10) || 10;
     let totalResults = await model.countDocuments();
     let pagination = {};
     let startIndex = (page - 1) * limit;

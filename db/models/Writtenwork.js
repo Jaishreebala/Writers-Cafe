@@ -22,7 +22,7 @@ const WrittenworkScema = new mongoose.Schema({
     genre: {
         type: [String],
         required: [true, 'Please choose the genre of your work.'],
-        enum: ['Fantasy', 'Adventure', 'Romance', 'Contemporary', 'Dystopian', 'Mystery', 'Horror', 'Thriller', 'Paranormal', 'Historical fiction', 'Science Fiction', 'Memoir', 'Cooking', 'Art', 'Self-help / Personal', 'Development', 'Motivational', 'Health', 'History', 'Travel', 'Guide / How-to', 'Families & Relationships', 'Humor', 'Children’s', 'Other']
+        enum: ['Fantasy', 'Adventure', 'Romance', 'Contemporary', 'Dystopian', 'Mystery', 'Horror', 'Thriller', 'Paranormal', 'Historical fiction', 'Science Fiction', 'Self-help / Personal', 'Motivational', 'Guide / How-to', 'Humor', 'Children’s', 'Other']
     },
     view: {
         type: String,
