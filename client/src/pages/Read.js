@@ -61,51 +61,27 @@ function Read({ isLoggedIn }) {
     }
     const removeWrittenWorkHandler = (idx) => {
         let newSelectedWritten = selectedWrittenwork.filter((workType, id) => id !== idx);
-        // console.log(newSelectedWritten)
-        // // newSelectedWritten = newSelectedWritten.filter((workType, id) => id !== idx);
-        // newSelectedWritten = newSelectedWritten.slice(idx);
-        // console.log(newSelectedWritten)
-        // console.log(selectedWrittenwork)
-
         setSelectedWrittenwork(newSelectedWritten);
-        // console.log(newSelectedWritten)
-        // console.log(e.target.textContent)
-        // newSelectedWritten = selectedWrittenwork.slice(idx)
-
-        // newSelectedWritten.forEach((workType, index) => {
-        //     if (workType === e.target.textContent.trim())
-        //         newSelectedWritten.splice(index, 1)
-        // })
-        console.log(newSelectedWritten)
-        // console.log(selectedWrittenwork)
-        // setSelectedWrittenwork(selectedWrittenwork.splice(idx, 1));
-
-        updateQuery();
+        updateQuery(newSelectedWritten, selectedGenre);
     }
     const removeGenreHandler = (e) => {
-        setSelectedGenre(selectedGenre.filter(genre => genre !== e.target.textContent.trim()));
-        updateQuery();
+        let newSelectedGenre = selectedGenre.filter(genre => genre !== e.target.textContent.trim());
+        setSelectedGenre(newSelectedGenre);
+        updateQuery(selectedWrittenwork, newSelectedGenre);
     }
-    function updateQuery() {
-        if (!selectedGenre.length && !selectedWrittenwork.length) {
-            console.log("1")
+    function updateQuery(selectedTagList, selectedGenreList) {
+        if (!selectedGenreList.length && !selectedTagList.length) {
             setQuery(`api/v1/writtenWork`);
         }
-        else if (!selectedGenre.length && selectedWrittenwork.length > 0) {
-            console.log("2")
-
-            setQuery(`api/v1/writtenWork?workType[in]=${selectedWrittenwork}`)
+        else if (!selectedGenreList.length && selectedTagList.length > 0) {
+            setQuery(`api/v1/writtenWork?workType[in]=${selectedTagList}`)
         }
-        else if (!selectedWrittenwork.length && selectedGenre.length > 0) {
-            console.log("3")
-
-            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}`);
+        else if (!selectedTagList.length && selectedGenreList.length > 0) {
+            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenreList}`);
         }
         else {
-            console.log("4")
-            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}&workType[in]=${selectedWrittenwork}`)
+            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenreList}&workType[in]=${selectedTagList}`)
         }
-        console.log(`query: ${query}`)
     }
     return (
         <div>
