@@ -1,0 +1,83 @@
+.readWrittenWork{
+    background-color: #fff;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    position: relative;
+    .readSection{
+        margin-right: 350px;
+    
+        .heading{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                color: #7F66C5;
+                font-weight: 400;
+                font-size: 2rem;
+            }
+            .fullscreen{
+                font-weight: 400;
+                color: #7F66C5;
+            }
+        }
+        .readArea{
+            border-radius:  1rem 1rem 0 0;
+            margin: 0 1rem;
+            padding: 1rem;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+            height: calc(100vh - 80px - 3rem);
+            overflow: scroll;
+        }
+    }
+    .description{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: linear-gradient(163.98deg, #7F66C4 -14.44%, #00AFE7 140.68%);
+        width: 350px;
+        height: 100%;
+        padding: 0.5rem;
+        overflow: scroll;
+        h1{
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        h2{
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+        .tags:nth-child(1){
+            margin-left: 0;
+        }
+        p{
+            color: #fff;
+        }
+        .comments{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            h1{
+                font-size: 1.35rem;
+                font-weight: 300;
+                border-bottom: solid 1px white;
+            }
+            
+        }
+        .comment{
+            padding: 1rem 0;
+            color: #fff;
+            .commentName{
+                display: flex;
+                align-items: center;
+                img{
+                    height: 3rem;
+                    padding-right: 0.5rem;
+                }
+            }
+        }
+    }
+}

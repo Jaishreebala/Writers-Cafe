@@ -86,10 +86,8 @@ function Read({ isLoggedIn }) {
     return (
         <div>
             {!isLoggedIn ? <Redirect to="/read" /> : ""}
-            {console.log(selectedWrittenwork)}
             <div className="header">
                 <div className="section">
-                    {/* <input type="text" placeholder="Search for Stories, Poems and more..." /> */}
                     <div className="tagsArea">
                         {selectedWrittenwork.map((workType, idx) => <div key={workType} onClick={() => removeWrittenWorkHandler(idx)} className="tags">{workType} <img src={cross} alt="Cancel" /> </div>)}
                         {selectedGenre.map(genre => <div key={genre} onClick={removeGenreHandler} className="tags">{genre} <img src={cross} alt="Cancel" /> </div>)}
