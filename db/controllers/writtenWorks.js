@@ -2,7 +2,7 @@ const Writtenwork = require("../models/Writtenwork");
 const errorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const path = require("path");
-
+const User = require('../models/User')
 
 // @desc    Get All Written Works
 // @route   GET | api/v1/writtenWorks
@@ -17,7 +17,12 @@ exports.getAllWrittenWorks = asyncHandler(async (req, res, next) => {
 // @access  public
 
 exports.getWrittenWorkById = asyncHandler(async (req, res, next) => {
-    const writtenWork = await Writtenwork.findById(req.params.id).populate({ path: 'author', select: 'firstName lastName' }).populate({ path: 'comments', select: 'comment' });
+    const writtenWork = await Writtenwork.findById(req.params.id).populate({ path: 'author', select: 'firstName lastName' }).populate({
+        path: 'comments', select: 'comment', populate: {
+            path: 'user',
+            select: 'firstName lastName photo'
+        }
+    });
     if (!writtenWork) {
         return next(new errorResponse(`Written work not found with the ID of ${req.params.id}`, 400));
     }
