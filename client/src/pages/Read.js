@@ -2,24 +2,62 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import Card from '../components/Card';
 import arrow from '../images/arrow.svg'
+import cross from '../images/cross.svg'
 function Read({ isLoggedIn }) {
     const [isGenreOpen, setIsGenreOpen] = useState(false);
     const [isWorkOpen, setIsWorkOpen] = useState(false);
     const [writtenWorkData, setWrittenWorkData] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState([]);
+    const [selectedWrittenwork, setSelectedWrittenwork] = useState([]);
+    const [query, setQuery] = useState(`api/v1/writtenWork`);
     useEffect(() => {
         readWrittenWorkHandler();
-    }, [])
+    }, [query])
     const readWrittenWorkHandler = async () => {
         try {
-            const response = await fetch("api/v1/writtenWork")
+            const response = await fetch(query)
             const data = await response.json();
-            console.log(data.data);
             setWrittenWorkData(data.data);
         } catch (err) {
             console.log(err)
         }
     }
-
+    const selectedGenreHandler = async (e) => {
+        let push = true;
+        selectedGenre.forEach(genre => {
+            if (genre === e.target.textContent) {
+                push = false;
+            }
+        })
+        if (push) {
+            selectedGenre.push(e.target.textContent)
+            setSelectedGenre(selectedGenre)
+            if (!selectedWrittenwork.length) {
+                setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}`);
+            }
+            else {
+                setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}&workType[in]=${selectedWrittenwork}`)
+            }
+        }
+    }
+    const selectedWrittenworkHandler = async (e) => {
+        let push = true;
+        selectedWrittenwork.forEach(workType => {
+            if (workType === e.target.textContent) {
+                push = false;
+            }
+        })
+        if (push) {
+            selectedWrittenwork.push(e.target.textContent)
+            setSelectedWrittenwork(selectedWrittenwork)
+        }
+        if (!selectedGenre.length) {
+            setQuery(`api/v1/writtenWork?workType[in]=${selectedWrittenwork}`);
+        }
+        else {
+            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}&workType[in]=${selectedWrittenwork}`)
+        }
+    }
     return (
         <div>
             {!isLoggedIn ? <Redirect to="/read" /> : ""}
@@ -27,8 +65,8 @@ function Read({ isLoggedIn }) {
                 <div className="section">
                     <input type="text" placeholder="Search for Stories, Poems and more..." />
                     <div className="tagsArea">
-                        <div className="tags">Romance</div>
-                        <div className="tags">Romance</div>
+                        {selectedWrittenwork.map(workType => <div className="tags">{workType} <img src={cross} alt="Cancel" /> </div>)}
+                        {selectedGenre.map(genre => <div className="tags">{genre} <img src={cross} alt="Cancel" /> </div>)}
                     </div>
                 </div>
                 <div className="section">
@@ -39,7 +77,7 @@ function Read({ isLoggedIn }) {
                         }}>Genre
                         <img src={arrow} alt="arrow" className={isGenreOpen ? "rotateDown" : ""} />
                         </div>
-                        <ul className={`options ${isGenreOpen ? "expand" : ""}`}>
+                        <ul onClick={selectedGenreHandler} className={`options ${isGenreOpen ? "expand" : ""}`}>
                             <li>Fantasy</li>
                             <li>Adventure</li>
                             <li>Romance</li>
@@ -68,7 +106,7 @@ function Read({ isLoggedIn }) {
                         }}>Work Type
                         <img src={arrow} alt="arrow" className={isWorkOpen ? "rotateDown" : ""} />
                         </div>
-                        <ul className={`options ${isWorkOpen ? "expand" : ""}`}>
+                        <ul onClick={selectedWrittenworkHandler} className={`options ${isWorkOpen ? "expand" : ""}`}>
                             <li>Poetry</li>
                             <li>Short Story</li>
                             <li>Novel</li>

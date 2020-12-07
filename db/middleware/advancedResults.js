@@ -9,7 +9,8 @@ const advancedResults = (model, populate, populateAgain) => async (req, res, nex
     let keys = Object.keys(queryStr)
         .filter(key => queryStr[key].in)
     keys.forEach(key => {
-        queryStr[key].in = queryStr[key].in.split(" ");
+        if (queryStr[key].in)
+            queryStr[key].in = queryStr[key].in.split(",");
     })
     queryStr = JSON.stringify(queryStr);
     queryStr = queryStr.replace(/\b(gt|lt|gte|lte|in)\b/g, match => `$${match}`);
