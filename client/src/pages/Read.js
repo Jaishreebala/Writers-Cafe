@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import Card from '../components/Card';
 import arrow from '../images/arrow.svg'
 import cross from '../images/cross.svg'
@@ -21,6 +21,7 @@ function Read({ isLoggedIn }) {
         } catch (err) {
             console.log(err)
         }
+        console.log(query)
     }
     const selectedGenreHandler = async (e) => {
         let push = true;
@@ -58,15 +59,64 @@ function Read({ isLoggedIn }) {
             setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}&workType[in]=${selectedWrittenwork}`)
         }
     }
+    const removeWrittenWorkHandler = (idx) => {
+        let newSelectedWritten = selectedWrittenwork.filter((workType, id) => id !== idx);
+        // console.log(newSelectedWritten)
+        // // newSelectedWritten = newSelectedWritten.filter((workType, id) => id !== idx);
+        // newSelectedWritten = newSelectedWritten.slice(idx);
+        // console.log(newSelectedWritten)
+        // console.log(selectedWrittenwork)
+
+        setSelectedWrittenwork(newSelectedWritten);
+        // console.log(newSelectedWritten)
+        // console.log(e.target.textContent)
+        // newSelectedWritten = selectedWrittenwork.slice(idx)
+
+        // newSelectedWritten.forEach((workType, index) => {
+        //     if (workType === e.target.textContent.trim())
+        //         newSelectedWritten.splice(index, 1)
+        // })
+        console.log(newSelectedWritten)
+        // console.log(selectedWrittenwork)
+        // setSelectedWrittenwork(selectedWrittenwork.splice(idx, 1));
+
+        updateQuery();
+    }
+    const removeGenreHandler = (e) => {
+        setSelectedGenre(selectedGenre.filter(genre => genre !== e.target.textContent.trim()));
+        updateQuery();
+    }
+    function updateQuery() {
+        if (!selectedGenre.length && !selectedWrittenwork.length) {
+            console.log("1")
+            setQuery(`api/v1/writtenWork`);
+        }
+        else if (!selectedGenre.length && selectedWrittenwork.length > 0) {
+            console.log("2")
+
+            setQuery(`api/v1/writtenWork?workType[in]=${selectedWrittenwork}`)
+        }
+        else if (!selectedWrittenwork.length && selectedGenre.length > 0) {
+            console.log("3")
+
+            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}`);
+        }
+        else {
+            console.log("4")
+            setQuery(`api/v1/writtenWork?genre[in]=${selectedGenre}&workType[in]=${selectedWrittenwork}`)
+        }
+        console.log(`query: ${query}`)
+    }
     return (
         <div>
             {!isLoggedIn ? <Redirect to="/read" /> : ""}
+            {console.log(selectedWrittenwork)}
             <div className="header">
                 <div className="section">
-                    <input type="text" placeholder="Search for Stories, Poems and more..." />
+                    {/* <input type="text" placeholder="Search for Stories, Poems and more..." /> */}
                     <div className="tagsArea">
-                        {selectedWrittenwork.map(workType => <div className="tags">{workType} <img src={cross} alt="Cancel" /> </div>)}
-                        {selectedGenre.map(genre => <div className="tags">{genre} <img src={cross} alt="Cancel" /> </div>)}
+                        {selectedWrittenwork.map((workType, idx) => <div key={workType} onClick={() => removeWrittenWorkHandler(idx)} className="tags">{workType} <img src={cross} alt="Cancel" /> </div>)}
+                        {selectedGenre.map(genre => <div key={genre} onClick={removeGenreHandler} className="tags">{genre} <img src={cross} alt="Cancel" /> </div>)}
                     </div>
                 </div>
                 <div className="section">
@@ -119,7 +169,7 @@ function Read({ isLoggedIn }) {
             </div>
             <div className="cardsSection">
                 {
-                    writtenWorkData.map(writtenWork => <Card key={writtenWork._id} name={writtenWork.name} author={`${writtenWork.author.firstName} ${writtenWork.author.lastName}`} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} />)
+                    writtenWorkData.map(writtenWork => <Link to={`/readwrittenwork/${writtenWork._id}`}> <Card key={writtenWork._id} name={writtenWork.name} author={`${writtenWork.author.firstName} ${writtenWork.author.lastName}`} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> </Link>)
                 }
             </div>
         </div >

@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Read from './pages/Read'
 import Profile from './pages/Profile'
+import ReadWrittenWork from './pages/ReadWrittenWork'
 
 import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path="/resetpassword/:resettoken" exact>
           <Resetpassword isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/readwrittenwork/:id" exact>
+          <ReadWrittenWork isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
     </div>
