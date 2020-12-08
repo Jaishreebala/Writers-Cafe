@@ -91,7 +91,6 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
                 <Messages message={message} />
                 <div onClick={forgotPasswordHandler} className="links">Forgot Password?</div>
                 <button onClick={loginHandler} className="button">Login</button>
-                {/* <button onClick={createWrittenWorkHandler} className="button">Login</button> */}
                 <div className="links borderTop">Don't Have An Accout? <b>
                     <Link to="/register">Sign Up</Link>
                 </b></div>

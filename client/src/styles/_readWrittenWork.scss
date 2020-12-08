@@ -12,6 +12,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1rem;
             h1{
                 color: #7F66C5;
                 font-weight: 400;
@@ -43,7 +44,6 @@
         background: linear-gradient(163.98deg, #7F66C4 -14.44%, #00AFE7 140.68%);
         width: 350px;
         height: 100%;
-        padding: 0.5rem;
         overflow: scroll;
         h1{
             color: #fff;
@@ -78,6 +78,7 @@
             border-bottom: solid 1px rgba(187, 187, 187, 0.5);
             margin-bottom: 0.5rem;
             color: #fff;
+           
             .commentName{
                 display: flex;
                 align-items: center;
@@ -87,12 +88,22 @@
                 }
             }
         }
+        .userInputSection{
+            position: sticky;
+            bottom: 0;
+            padding: 0.5rem;
+            background-color: #fff;
+            color: #7F66C4;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
+        }
+    }
+    .padding{
+        padding: 0.5rem;
     }
 }
 
 .fullscreen-enabled .readArea {
     background: #fff;
-    color: #7F66C5;
     border-radius: 0px;
     margin: 0px!important;
     padding: 1rem;
