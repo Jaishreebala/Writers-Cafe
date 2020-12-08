@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Card from '../components/Card';
 import arrow from '../images/arrow.svg'
 import cross from '../images/cross.svg'
@@ -21,7 +21,7 @@ function Read({ isLoggedIn }) {
         } catch (err) {
             console.log(err)
         }
-        console.log(query)
+
     }
     const selectedGenreHandler = async (e) => {
         let push = true;
@@ -143,7 +143,7 @@ function Read({ isLoggedIn }) {
             </div>
             <div className="cardsSection">
                 {
-                    writtenWorkData.map(writtenWork => <Link to={`/readwrittenwork/${writtenWork._id}`}> <Card key={writtenWork._id} name={writtenWork.name} author={`${writtenWork.author.firstName} ${writtenWork.author.lastName}`} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> </Link>)
+                    writtenWorkData.map(writtenWork => { return <Card key={writtenWork._id} id={writtenWork._id} name={writtenWork.name} author={`${writtenWork.author.firstName} ${writtenWork.author.lastName}`} photo={writtenWork.photo} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> })
                 }
             </div>
         </div >

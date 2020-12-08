@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import profilePlaceholder from '../images/profilePlaceholder.svg'
+import profilePlaceholder from '../images/profilePlaceholder.svg';
+import expand from '../images/expand.svg';
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
 function ReadWrittenWork() {
     const { id } = useParams();
     const [writtenWorkData, setWrittenWorkData] = useState([]);
     const [query, setQuery] = useState(`/api/v1/writtenWork/${id}`);
+    const handle = useFullScreenHandle();
     useEffect(() => {
         loadWrittenWork();
     }, [query])
@@ -18,7 +22,7 @@ function ReadWrittenWork() {
             console.log(err)
         }
     }
-    console.log(writtenWorkData.author)
+
     return (
         <>
             {
@@ -26,13 +30,19 @@ function ReadWrittenWork() {
                     <div className="readSection">
                         <div className="heading">
                             <h1>{writtenWorkData.name}</h1>
-                            <div className="fullscreen">
-                                img Fullscreen
+                            <div onClick={handle.enter} className="fullscreen">
+                                <img src={expand} alt="expand" /> Fullscreen
                 </div>
                         </div>
-                        <div className="readArea">
+                        <FullScreen handle={handle} style={{ color: '#fff' }}>
+                            wewuiekj
+                            <div className="readArea">
+                                {writtenWorkData.content}
+                            </div>
+                        </FullScreen>
+                        {/* <div className="readArea" ref={fullscreenTargetarea}>
                             {writtenWorkData.content}
-                        </div>
+                        </div> */}
                     </div>
                     <div className="description">
                         <h1>{writtenWorkData.name}</h1>
