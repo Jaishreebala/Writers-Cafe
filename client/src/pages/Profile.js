@@ -38,7 +38,7 @@ function Profile({ isLoggedIn }) {
                             </div>
                             <div>
                                 <h1>{profileData.firstName} {profileData.lastName}</h1>
-                                <div> <img src={add} alt="Plus" /> Add Address</div>
+                                {profileData.location.formattedAddress ? <div> {profileData.location.formattedAddress}</div> : <div> <img src={add} alt="Plus" /> Add Address</div>}
                             </div>
                         </div>
                         <div className="section">
@@ -49,7 +49,7 @@ function Profile({ isLoggedIn }) {
                     </div>
                     <div className="cardsSection">
                         {
-                            profileData.writtenworks.map(writtenWork => { return <Card key={writtenWork._id} view={writtenWork.view} name={writtenWork.name} photo={writtenWork.photo} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> })
+                            profileData.writtenworks.map(writtenWork => { return <Card key={writtenWork._id} id={writtenWork._id} rating={writtenWork.averageRating} view={writtenWork.view} name={writtenWork.name} photo={writtenWork.photo} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> })
                         }
                     </div>
                 </div>

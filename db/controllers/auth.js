@@ -54,7 +54,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 // @access  private
 
 exports.getMe = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.user.id).populate({ path: 'writtenworks', select: 'name genre photo view description workType' });
+    const user = await User.findById(req.user.id).populate({ path: 'writtenworks', select: 'name genre photo view description workType averageRating' });
     res.status(200).json({ success: true, data: user })
 })
 

@@ -6,7 +6,7 @@ function Card({ name, id, author, description, workType, genre, triggerWarning, 
     return (
         <>
             {
-                <Link to={`/readwrittenwork/${id}`}>
+                <Link class="cardLink" to={`/readwrittenwork/${id}`}>
                     <div className="cards">
                         <img src={storyImage} alt="Placeholder" />
                         <div className="cardText">

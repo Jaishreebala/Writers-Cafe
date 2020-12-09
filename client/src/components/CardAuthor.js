@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import storyImage from '../images/placeholder_writtenwork.svg'
 import emptyStar from '../images/empty_star.svg';
 import filledStar from '../images/filled_star.svg';
+import editIcon from '../images/edit.svg';
+import deleteIcon from '../images/delete.svg'
 
 function CardAuthor({ name, id, view, rating, description, workType, genre, triggerWarning, nsfw, violence }) {
     const starRenderer = () => {
@@ -21,7 +23,17 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
     return (
         <>
             {
-                <Link to={`/readwrittenwork/${id}`}>
+                <Link class="cardLink">
+                    <div className="cardOverlay">
+                        <Link to={`/readwrittenwork/${id}`}>
+                            <div className="toolTip" toolTip="Edit Your Written Work" >
+                                <img src={editIcon} alt="Edit" />
+                            </div>
+                        </Link>
+                        <div className="toolTip" toolTip="Delete This Written Work" >
+                            <img src={deleteIcon} alt="Delete" />
+                        </div>
+                    </div>
                     <div className="cards">
                         <img src={storyImage} alt="Placeholder" />
                         <div className="cardText">

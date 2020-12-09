@@ -74,6 +74,46 @@ a{
         padding-right: 10px;
     }
 }
+.toolTip{
+    position: relative;
+    transition: all 1s;
+}
+.toolTip::before{
+    content: "";
+    // border-width: 10px 8px 10px 8px;
+    // border-style: solid;
+    // border-color: rgba(0,0,0,1) transparent transparent transparent;
+    border: solid 10px transparent;
+    border-bottom-color: rgb(18, 18, 62);
+    top: 100%;
+    transform: translateY(-100%);
+    margin-left: -8px;
+    position: absolute;
+    display: block;
+    left: 50%;
+    opacity: 0;
+}
+
+.toolTip::after{
+    content: attr(toolTip);
+    display: block;
+    background-color: rgb(18, 18, 62);
+    position: absolute;
+    padding: 3px;
+    margin: 0 3px;
+    color: #fff;
+    left: 50%;
+    top: 100%;
+    width: 100px;
+    border-radius: 0.4rem;
+    text-align: center;
+    font-size: 0.75rem;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+.toolTip:hover::after, .toolTip:hover::before{
+    opacity: 1;
+}
 @import "./login";
 @import "./nav";
 @import "./card";
