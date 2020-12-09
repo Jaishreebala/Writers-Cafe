@@ -5,6 +5,7 @@ import expand from '../images/expand.svg';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import emptyStar from '../images/empty_star.svg';
 import filledStar from '../images/filled_star.svg';
+import about from '../images/about.svg';
 import Error from '../components/Error';
 import { useHistory } from 'react-router-dom'
 
@@ -35,8 +36,6 @@ function ReadWrittenWork({ isLoggedIn }) {
     }
     const submitCommentHandler = async () => {
         if (isLoggedIn) {
-
-
             if (commentRef.current.value.length) {
                 try {
                     const response = await fetch(`/api/v1/writtenWork/${id}/comments`, {
@@ -85,7 +84,7 @@ function ReadWrittenWork({ isLoggedIn }) {
                 const data = await response.json();
                 console.log(data)
                 if (data.success) {
-                    setQuery(query)
+                    // setQuery(`/api/v1/writtenWork/${}`)
                 }
             } catch (err) {
                 console.log(err)
@@ -126,8 +125,13 @@ function ReadWrittenWork({ isLoggedIn }) {
                     <div className="readSection">
                         <div className="heading">
                             <h1>{writtenWorkData.name}</h1>
-                            <div onClick={handle.enter} className="fullscreen">
-                                <img src={expand} alt="expand" /> Fullscreen
+                            <div>
+                                <div onClick={handle.enter} className="fullscreen">
+                                    <img src={expand} alt="expand" /> Fullscreen
+                            </div>
+                                <div onClick={handle.enter} className="fullscreen">
+                                    <img src={about} alt="expand" /> About
+                            </div>
                             </div>
                         </div>
                         <FullScreen handle={handle} style={{ color: '#fff' }}>

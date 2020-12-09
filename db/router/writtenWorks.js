@@ -10,7 +10,7 @@ router.use("/:writtenworkId/comments", comments);
 
 router
     .route("/")
-    .get(advancedResults(Writtenwork, { path: 'author', select: 'firstName lastName' }, { path: 'comments', select: 'comment' }), getAllWrittenWorks)
+    .get(advancedResults(Writtenwork, { path: 'author', select: 'firstName lastName' }, { path: 'comments', select: 'comment' }, true), getAllWrittenWorks)
     .post(protect, createNewWrittenWork)
 
 router

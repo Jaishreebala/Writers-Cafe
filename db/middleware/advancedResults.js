@@ -1,4 +1,4 @@
-const advancedResults = (model, populate, populateAgain) => async (req, res, next) => {
+const advancedResults = (model, populate, populateAgain, protectPrivate) => async (req, res, next) => {
     let query;
     let reqQuery = { ...req.query };
     let removeFields = ['select', 'sort', 'page', 'limit'];
@@ -15,9 +15,12 @@ const advancedResults = (model, populate, populateAgain) => async (req, res, nex
     queryStr = JSON.stringify(queryStr);
     queryStr = queryStr.replace(/\b(gt|lt|gte|lte|in)\b/g, match => `$${match}`);
     queryStr = JSON.parse(queryStr);
-    if (model == 'Writtenwork') {
+
+    if (protectPrivate) {
         queryStr.view = 'public';
     }
+
+    console.log(queryStr)
     // public
     query = model.find(queryStr)
     if (populate) {
