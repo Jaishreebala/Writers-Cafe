@@ -5,6 +5,24 @@
     width: 80%;
     margin: auto;
     position: relative;
+    .options{
+        display: flex;
+        align-items: center;
+        div{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: 1s;
+            &:hover{
+                background-color: #E4DBFF;
+            }
+            img{
+                margin-right: 5px;
+            }
+        }
+    }
     .readSection{
         margin-right: 350px;
     
@@ -35,6 +53,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
             height: calc(100vh - 80px - 3rem);
             overflow: scroll;
+            width: calc(100% - 2rem);
         }
     }
     .description{

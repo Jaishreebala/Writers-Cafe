@@ -25,7 +25,6 @@ function ReadWrittenWork({ isLoggedIn }) {
     }, [query])
     const commentRef = useRef();
     const loadWrittenWork = async () => {
-        console.log(`/api/v1/writtenWork/${id}`)
         try {
             const response = await fetch(query)
             const data = await response.json();
@@ -82,7 +81,6 @@ function ReadWrittenWork({ isLoggedIn }) {
                     }
                 })
                 const data = await response.json();
-                console.log(data)
                 if (data.success) {
                     // setQuery(`/api/v1/writtenWork/${}`)
                 }
@@ -103,7 +101,6 @@ function ReadWrittenWork({ isLoggedIn }) {
             }
         }
         setUserRating(userRating)
-        console.log(userRating)
     }
 
     const starRenderer = () => {
@@ -113,7 +110,7 @@ function ReadWrittenWork({ isLoggedIn }) {
                 ratingRenderer.push(<img key={i} src={filledStar} alt="filled star" />)
             }
             else {
-                ratingRenderer.push(<img src={emptyStar} alt="empty star" />)
+                ratingRenderer.push(<img key={i} src={emptyStar} alt="empty star" />)
             }
         }
         return ratingRenderer;
@@ -125,13 +122,13 @@ function ReadWrittenWork({ isLoggedIn }) {
                     <div className="readSection">
                         <div className="heading">
                             <h1>{writtenWorkData.name}</h1>
-                            <div>
+                            <div className="options">
                                 <div onClick={handle.enter} className="fullscreen">
                                     <img src={expand} alt="expand" /> Fullscreen
-                            </div>
+                                </div>
                                 <div onClick={handle.enter} className="fullscreen">
                                     <img src={about} alt="expand" /> About
-                            </div>
+                                </div>
                             </div>
                         </div>
                         <FullScreen handle={handle} style={{ color: '#fff' }}>
@@ -171,6 +168,7 @@ function ReadWrittenWork({ isLoggedIn }) {
                                             </div>
                                         </div>
                                     }
+                                    return "";
                                 }
                                 )}
                             </div>
@@ -187,7 +185,7 @@ function ReadWrittenWork({ isLoggedIn }) {
 
                                 {userRating.map((rating, i) =>
                                     <img onClick={() => submitReviewHandler(i + 1)}
-                                        onMouseOver={() => mouseOverStar(i)} key={i} src={rating == 1 ? filledStar : emptyStar}
+                                        onMouseOver={() => mouseOverStar(i)} key={i} src={rating ? filledStar : emptyStar}
                                         alt="empty star" />)
                                 }
                             </div>

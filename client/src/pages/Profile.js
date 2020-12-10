@@ -15,7 +15,7 @@ function Profile({ isLoggedIn }) {
         try {
             const response = await fetch("api/v1/auth/me")
             const data = await response.json();
-            console.log(data)
+            // console.log(data)
             setProfileData(data.data);
         } catch (err) {
             console.log(err)
@@ -28,7 +28,6 @@ function Profile({ isLoggedIn }) {
         <>
             {
                 profileData.writtenworks &&
-
                 <div className="profilePage">
                     {!isLoggedIn ? <Redirect to="/read" /> : ""}
                     <div className="header">
@@ -38,7 +37,7 @@ function Profile({ isLoggedIn }) {
                             </div>
                             <div>
                                 <h1>{profileData.firstName} {profileData.lastName}</h1>
-                                {profileData.location.formattedAddress ? <div> {profileData.location.formattedAddress}</div> : <div> <img src={add} alt="Plus" /> Add Address</div>}
+                                <div className="hoverBlendWhiteButton">{profileData.location.formattedAddress ? <div> {profileData.location.formattedAddress}</div> : <div> <img src={add} alt="Plus" /> Add Address</div>}</div>
                             </div>
                         </div>
                         <div className="section">

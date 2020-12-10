@@ -1,8 +1,4 @@
 .profilePage{
-    .view-tag{
-        background-color: #F0F0F0;
-        color: #000;
-    }
     .cardsSection{
         .cards{
             .rating img{
@@ -19,20 +15,9 @@
                 font-weight: 400;
             }
             div {
-                div{
-                    display: flex;
-                    align-items: center;
-                    padding: 5px;
-                    border-radius: 5px;
-                    width: fit-content;
-                    background-color: transparent;
-                    transition: 0.5s;
-                    cursor: pointer;
+                .hoverBlendWhiteButton{
                     img{
                         margin-right: 5px;
-                    }
-                    &:hover{
-                        background-color: rgba(177, 177, 177, 0.5);
                     }
                 }
             }

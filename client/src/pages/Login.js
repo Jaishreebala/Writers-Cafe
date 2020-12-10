@@ -69,7 +69,6 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
     return (
         <div className="login">
             {isLoggedIn ? <Redirect to="/profile" /> : ""}
-            {console.log(isLoggedIn)}
             <img src={logoNoBg} alt="Main Logo" />
             <form className="login-form">
                 <h1>Login To Your Writer’s Cafe Account</h1>

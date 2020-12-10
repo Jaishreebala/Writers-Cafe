@@ -7,12 +7,15 @@
 body{
     background: linear-gradient(65.93deg, #7F66C5 34.03%, #50D5FF 93.12%)
 }
-button, input{
+button, input, textarea{
     border: none;
     outline: none;
     border: none;
     background-color: transparent;
     font-size: inherit;
+}
+textarea{
+    resize: none;
 }
 .error{
     color: #E84E4F;
@@ -27,6 +30,7 @@ a{
     text-decoration: none;
     color: inherit;
 }
+
 .tagsArea{
     display: flex;
     flex-wrap: wrap;
@@ -39,6 +43,10 @@ a{
     padding: 0.1rem 0.5rem;
     margin: 0.5rem;
     cursor: pointer;
+}
+.view-tag{
+    background-color: #F0F0F0;
+    color: #000;
 }
 .warning-tag{
     border: #E84E4F solid 1px;
@@ -80,9 +88,6 @@ a{
 }
 .toolTip::before{
     content: "";
-    // border-width: 10px 8px 10px 8px;
-    // border-style: solid;
-    // border-color: rgba(0,0,0,1) transparent transparent transparent;
     border: solid 10px transparent;
     border-bottom-color: rgb(18, 18, 62);
     top: 100%;
@@ -113,6 +118,23 @@ a{
 }
 .toolTip:hover::after, .toolTip:hover::before{
     opacity: 1;
+}
+.hoverBlendWhiteButton{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+    background-color: transparent;
+    transition: 0.5s;
+    cursor: pointer;
+    img{
+        margin-right: 5px;
+    }
+    &:hover{
+        background-color: rgba(177, 177, 177, 0.5);
+    }
 }
 @import "./login";
 @import "./nav";

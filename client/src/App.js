@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Read from './pages/Read'
 import Profile from './pages/Profile'
 import ReadWrittenWork from './pages/ReadWrittenWork'
+import EditWrittenwork from './pages/EditWrittenwork'
 
 import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path="/readwrittenwork/:id" exact>
           <ReadWrittenWork isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/editwrittenwork/:id" exact>
+          <EditWrittenwork isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
     </div>

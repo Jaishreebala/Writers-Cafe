@@ -14,7 +14,7 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
                 ratingRenderer.push(<img key={i} src={filledStar} alt="filled star" />)
             }
             else {
-                ratingRenderer.push(<img src={emptyStar} alt="empty star" />)
+                ratingRenderer.push(<img key={i} src={emptyStar} alt="empty star" />)
             }
         }
         return ratingRenderer;
@@ -23,14 +23,14 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
     return (
         <>
             {
-                <Link class="cardLink">
+                <div className="cardLink">
                     <div className="cardOverlay">
-                        <Link to={`/readwrittenwork/${id}`}>
-                            <div className="toolTip" toolTip="Edit Your Written Work" >
+                        <Link to={`/editwrittenwork/${id}`}>
+                            <div className="toolTip" tooltip={"Edit Your Written Work"} >
                                 <img src={editIcon} alt="Edit" />
                             </div>
                         </Link>
-                        <div className="toolTip" toolTip="Delete This Written Work" >
+                        <div className="toolTip" tooltip={"Delete This Written Work"} >
                             <img src={deleteIcon} alt="Delete" />
                         </div>
                     </div>
@@ -53,7 +53,7 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
                         </div>
 
                     </div>
-                </Link>
+                </div>
             }
         </>
     )
