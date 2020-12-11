@@ -14,9 +14,14 @@ function EditWrittenwork({ isLoggedIn }) {
     const { id } = useParams();
     const [query, setQuery] = useState(`/api/v1/writtenWork/${id}`);
     const [writtenWorkData, setWrittenWorkData] = useState([]);
+    const [isDescFocus, setIsDescFocus] = useState(false);
+
     const [lastText, setLastText] = useState("");
     const [text, setText] = useState("");
+    const [lastDescText, setLastDescText] = useState("");
+    const [descText, setDescText] = useState("");
     const textRef = useRef();
+    const descRef = useRef();
     useEffect(() => {
         const timer = setTimeout(async () => {
             if (lastText != text) {
@@ -38,6 +43,27 @@ function EditWrittenwork({ isLoggedIn }) {
         }, 3000)
         return () => clearTimeout(timer);
     }, [text])
+    useEffect(() => {
+        const timerForDesc = setTimeout(async () => {
+            if (lastDescText != descText) {
+                try {
+                    await fetch(`/api/v1/writtenWork/${id}`, {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            description: descText
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    })
+                } catch (err) {
+                    console.log(err)
+                }
+                setLastDescText(descText);
+            }
+        }, 3000)
+        return () => clearTimeout(timerForDesc);
+    }, [descText])
     const { transcript, resetTranscript } = useSpeechRecognition()
     const handle = useFullScreenHandle();
     // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -109,14 +135,22 @@ function EditWrittenwork({ isLoggedIn }) {
                             <div className="tags">{writtenWorkData.workType}</div>
                             {writtenWorkData.genre.map(gen => <div key={gen} className="tags">{gen}</div>)}
                         </div>
-                        <p>{writtenWorkData.description} </p>
+                        <p>
+                            {/* <textarea  name="description" id="description" className={`descArea ${isDescFocus ? 'editting' : ''}`} ref={descRef} onChange={(e) => { setDescText(descRef.current.value) }} onBlur={() => { setIsDescFocus(false) }} onFocus={() => { setIsDescFocus(true) }}>
+                                {writtenWorkData.description}
+                            </textarea> */}
+                            <div
+                                contentEditable className={`descArea ${isDescFocus ? 'editting' : ''}`} ref={descRef} onInput={(e) => { console.log(descRef.current.textContent); setDescText(descRef.current.textContent) }} onBlur={() => { setIsDescFocus(false) }} onFocus={() => { setIsDescFocus(true) }}>
+                                {writtenWorkData.description}
+                            </div>
+                        </p>
                         {writtenWorkData.view === "public" ? <div className="rating">
                             <div className="stars">
                                 {starRenderer()}
                             </div></div> : <div className="tagsArea"> <div className="tags view-tag">{writtenWorkData.view}</div> </div>}
-                        <div className="hoverBlendWhiteButton">
+                        {/* <div className="hoverBlendWhiteButton">
                             Edit Written Work Details
-                    </div>
+                    </div> */}
                     </div>
 
                     <div className="comments">

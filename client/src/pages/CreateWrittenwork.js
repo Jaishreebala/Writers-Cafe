@@ -6,7 +6,6 @@ function CreateWrittenwork() {
     const [isGenreOpen, setIsGenreOpen] = useState(false);
     const [view, setView] = useState(false);
     const [errors, setErrors] = useState("");
-
     const name = useRef();
     const description = useRef();
     const workType = useRef();

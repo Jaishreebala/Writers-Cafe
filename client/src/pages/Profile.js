@@ -37,7 +37,8 @@ function Profile({ isLoggedIn }) {
                             </div>
                             <div>
                                 <h1>{profileData.firstName} {profileData.lastName}</h1>
-                                <div className="hoverBlendWhiteButton">{profileData.location.formattedAddress ? <div> {profileData.location.formattedAddress}</div> : <div> <img src={add} alt="Plus" /> Add Address</div>}</div>
+                                {console.log(profileData)}
+                                <div className="hoverBlendWhiteButton">{profileData.location ? <div> {profileData.location.formattedAddress}</div> : <div> <img src={add} alt="Plus" /> Add Address</div>}</div>
                             </div>
                         </div>
                         <div className="section">
