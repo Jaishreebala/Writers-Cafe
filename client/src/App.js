@@ -8,6 +8,7 @@ import Read from './pages/Read'
 import Profile from './pages/Profile'
 import ReadWrittenWork from './pages/ReadWrittenWork'
 import EditWrittenwork from './pages/EditWrittenwork'
+import CreateWrittenwork from './pages/CreateWrittenwork'
 
 import Resetpassword from './pages/Resetpassword'
 import Nav from './components/Nav';
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/register" exact>
           <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
+        <Route path="/createWrittenwork" exact>
+          <CreateWrittenwork isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </Route>
         <Route path="/resetpassword/:resettoken" exact>
           <Resetpassword isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />

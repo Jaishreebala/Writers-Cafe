@@ -132,9 +132,9 @@ function ReadWrittenWork({ isLoggedIn }) {
                             </div>
                         </div>
                         <FullScreen handle={handle} style={{ color: '#fff' }}>
-                            <div className="readArea">
+                            <textarea className="readArea" readOnly>
                                 {writtenWorkData.content}
-                            </div>
+                            </textarea>
                         </FullScreen>
                     </div>
                     <div className="description">
