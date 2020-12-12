@@ -100,7 +100,7 @@ a{
 }
 
 .toolTip::after{
-    content: attr(toolTip);
+    content: attr(tooltip);
     display: block;
     background-color: rgb(18, 18, 62);
     position: absolute;
@@ -135,6 +135,14 @@ a{
     &:hover{
         background-color: rgba(177, 177, 177, 0.5);
     }
+}
+
+.showOpacity{
+    opacity: 1!important;
+}
+.showzindex{
+    z-index: 100;
+    transition: 0s!important;
 }
 @import "./login";
 @import "./nav";

@@ -3,7 +3,6 @@ import { Redirect, Link } from 'react-router-dom'
 import authorImage from '../images/profilePlaceholder.svg'
 import Card from '../components/CardAuthor';
 import add from '../images/plus.svg';
-import DeletePopup from '../components/DeletePopup';
 
 function Profile({ isLoggedIn }) {
     const [query, setQuery] = 'api/v1/auth/me';
@@ -11,7 +10,7 @@ function Profile({ isLoggedIn }) {
     const [editAddress, setEditAddress] = useState();
     const [addressFields, setAddressFields] = useState(false);
     const [profileLocation, setProfileLocation] = useState({});
-    const [showDeletePopup, setShowDeletePopup] = useState(false);
+    const [rerender, setRerender] = useState(false);
 
     let addressLine = "";
     let addressCountry = "";
@@ -19,7 +18,7 @@ function Profile({ isLoggedIn }) {
     let addressZipcode = "";
     useEffect(() => {
         getMyProfileHandler()
-    }, [query])
+    }, [query, rerender])
     const getMyProfileHandler = async () => {
         try {
             const response = await fetch("api/v1/auth/me")
@@ -61,8 +60,6 @@ function Profile({ isLoggedIn }) {
             {
                 profileData.writtenworks &&
                 <div className="profilePage">
-                    {/* <DeletePopup showDeletePopup={showDeletePopup} setShowDeletePopup={setShowDeletePopup} id={'none'} /> */}
-
                     {!isLoggedIn ? <Redirect to="/read" /> : ""}
                     <div className="header">
                         <div className="section">
@@ -93,7 +90,7 @@ function Profile({ isLoggedIn }) {
                         </div>
                     </div>
                     <div className="cardsSection">
-                        {profileData.writtenworks.map(writtenWork => { return <Card key={writtenWork._id} id={writtenWork._id} rating={writtenWork.averageRating} view={writtenWork.view} name={writtenWork.name} photo={writtenWork.photo} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> })}
+                        {profileData.writtenworks.map(writtenWork => { return <Card key={writtenWork._id} id={writtenWork._id} rerender={rerender} setRerender={setRerender} rating={writtenWork.averageRating} view={writtenWork.view} name={writtenWork.name} photo={writtenWork.photo} description={writtenWork.description} workType={writtenWork.workType} genre={writtenWork.genre} nsfw={writtenWork.nsfwContent} violence={writtenWork.violence} triggerWarning={writtenWork.suicideOrTriggerWarning} /> })}
                     </div>
                 </div>
             }

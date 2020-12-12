@@ -6,9 +6,21 @@ import filledStar from '../images/filled_star.svg';
 import editIcon from '../images/edit.svg';
 import deleteIcon from '../images/delete.svg'
 
-function CardAuthor({ name, id, view, rating, description, workType, genre, triggerWarning, nsfw, violence }) {
+function CardAuthor({ name, id, rerender, setRerender, view, rating, description, workType, genre, triggerWarning, nsfw, violence }) {
 
-    const [showDeletePopup, setShowDeletePopup] = useState(false);
+    const [isDeleteRequested, setIsDeleteRequested] = useState(false);
+    const deleteWrittenWorkHanlder = async () => {
+        try {
+            const response = await fetch(`/api/v1/writtenWork/${id}`, {
+                method: "DELETE"
+            })
+            const data = await response.json();
+            setRerender(!rerender)
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
     const starRenderer = () => {
         let ratingRenderer = [];
         for (let i = 0; i < 5; i++) {
@@ -27,20 +39,20 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
 
             {
                 <div className="cardLink">
-                    <div className="deleteOverlay">
+                    <div className={`deleteOverlay ${isDeleteRequested ? 'showOpacity' : ''}`}>
                         Are you sure you want to delete your written work - "{name}"?
                         <div className="buttons">
-                            <div className="button">Yes</div>
-                            <div className="button">No</div>
+                            <div className="button" onClick={deleteWrittenWorkHanlder}>Yes</div>
+                            <div className="button" onClick={() => { setIsDeleteRequested(false) }}>No</div>
                         </div>
                     </div>
                     <div className="cardOverlay">
                         <Link to={`/editwrittenwork/${id}`}>
-                            <div className="toolTip" tooltip={"Edit Your Written Work"} >
+                            <div className={`toolTip ${isDeleteRequested ? '' : 'showzindex'}`} tooltip={"Edit Your Written Work"} >
                                 <img src={editIcon} alt="Edit" />
                             </div>
                         </Link>
-                        <div className="toolTip" tooltip={"Delete This Written Work"}  >
+                        <div className={`toolTip ${isDeleteRequested ? '' : 'showzindex'}`} tooltip={"Delete This Written Work"} onClick={() => { setIsDeleteRequested(true) }}>
                             <img src={deleteIcon} alt="Delete" />
                         </div>
                     </div>
