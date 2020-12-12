@@ -70,17 +70,16 @@ function Profile({ isLoggedIn }) {
                                 <h1>{profileData.firstName} {profileData.lastName}</h1>
                                 {console.log(profileLocation)}
                                 <div className="hoverBlendWhiteButton">{profileLocation.formattedAddress ?
-                                    <div> 1{profileLocation.formattedAddress}</div> :
+                                    <div> {profileLocation.formattedAddress}</div> :
                                     addressFields ?
                                         <div className="addAddressArea">
-                                            2
                                             <input type="text" name="text" placeholder="Address" onChange={(e) => { addressLine = e.target.value }} />
                                             <input type="text" name="text" placeholder="City" onChange={(e) => { addressCity = e.target.value }} />
                                             <input type="text" name="text" placeholder="Country" onChange={(e) => { addressCountry = e.target.value }} />
                                             <input type="text" name="text" placeholder="Zipcode" onChange={(e) => { addressZipcode = e.target.value }} />
                                             <div onClick={addAddressHandler} className="button">Add</div>
                                         </div> :
-                                        <div onClick={() => { setAddressFields(true) }}>3 <img src={add} alt="Plus" /> Add Address</div>}</div>
+                                        <div onClick={() => { setAddressFields(true) }}><img src={add} alt="Plus" /> Add Address</div>}</div>
 
                             </div>
                         </div>
