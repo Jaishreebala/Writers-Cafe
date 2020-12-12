@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Error from '../components/Error';
+import { useHistory } from 'react-router-dom';
 
 function CreateWrittenwork() {
     const [isWorkOpen, setIsWorkOpen] = useState(false);
@@ -14,6 +15,8 @@ function CreateWrittenwork() {
     const nsfw = useRef();
     const violence = useRef();
     const triggerwarning = useRef();
+    const history = useHistory();
+
     const selectedWrittenworkHandler = () => {
         setIsWorkOpen(true)
     }
@@ -45,6 +48,7 @@ function CreateWrittenwork() {
             console.log(data)
             if (data.success) {
                 setErrors("");
+                history.replace(`/editwrittenwork/${data.data._id}`)
             } else {
                 setErrors(data.error);
             }

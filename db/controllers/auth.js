@@ -63,10 +63,25 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @access  private
 
 exports.updateMe = asyncHandler(async (req, res, next) => {
-    const fieldsToUpdate = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email };
-    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
-        new: true, runValidators: true
-    });
+    let user = await User.findOne({ _id: req.user.id });
+
+    if (!user) {
+        return next(new errorResponse(`Invalid Token`, 400));
+    }
+    if (req.body.firstName) {
+        user.firstName = req.body.firstName;
+    }
+    if (req.body.lastName) {
+        user.lastName = req.body.lastName;
+    }
+    if (req.body.email) {
+        user.email = req.body.email;
+    }
+    if (req.body.address) {
+        user.address = req.body.address;
+    }
+
+    await user.save({ validateBeforeSave: false });
     res.status(200).json({ success: true, data: user })
 })
 

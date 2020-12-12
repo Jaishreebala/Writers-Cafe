@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import storyImage from '../images/placeholder_writtenwork.svg'
 import emptyStar from '../images/empty_star.svg';
@@ -7,6 +7,8 @@ import editIcon from '../images/edit.svg';
 import deleteIcon from '../images/delete.svg'
 
 function CardAuthor({ name, id, view, rating, description, workType, genre, triggerWarning, nsfw, violence }) {
+
+    const [showDeletePopup, setShowDeletePopup] = useState(false);
     const starRenderer = () => {
         let ratingRenderer = [];
         for (let i = 0; i < 5; i++) {
@@ -22,15 +24,23 @@ function CardAuthor({ name, id, view, rating, description, workType, genre, trig
 
     return (
         <>
+
             {
                 <div className="cardLink">
+                    <div className="deleteOverlay">
+                        Are you sure you want to delete your written work - "{name}"?
+                        <div className="buttons">
+                            <div className="button">Yes</div>
+                            <div className="button">No</div>
+                        </div>
+                    </div>
                     <div className="cardOverlay">
                         <Link to={`/editwrittenwork/${id}`}>
                             <div className="toolTip" tooltip={"Edit Your Written Work"} >
                                 <img src={editIcon} alt="Edit" />
                             </div>
                         </Link>
-                        <div className="toolTip" tooltip={"Delete This Written Work"} >
+                        <div className="toolTip" tooltip={"Delete This Written Work"}  >
                             <img src={deleteIcon} alt="Delete" />
                         </div>
                     </div>

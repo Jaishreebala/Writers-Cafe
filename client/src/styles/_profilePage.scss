@@ -47,3 +47,15 @@
     }
    
 }
+.addAddressArea{
+    display: flex;
+    
+    input{
+        border-bottom: solid 1px #333;
+        margin-right: 1rem;
+        width: 100px;
+    }
+    input:nth-child(1){
+        width: 150px;
+    }
+}
