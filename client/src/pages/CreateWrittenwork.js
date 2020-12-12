@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import Error from '../components/Error';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
-function CreateWrittenwork() {
+function CreateWrittenwork({ isLoggedIn }) {
     const [isWorkOpen, setIsWorkOpen] = useState(false);
     const [isGenreOpen, setIsGenreOpen] = useState(false);
     const [view, setView] = useState(false);
@@ -59,6 +59,8 @@ function CreateWrittenwork() {
     }
     return (
         <div className="createPage">
+            {!isLoggedIn ? <Redirect to="/login" /> : ""}
+
             <div className="whitebg">
                 <div className="divider">
                     <Error error={errors} />

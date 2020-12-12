@@ -85,7 +85,6 @@ function Read({ isLoggedIn }) {
     }
     return (
         <div>
-            {!isLoggedIn ? <Redirect to="/read" /> : ""}
             <div className="header">
                 <div className="section">
                     <div className="tagsArea">

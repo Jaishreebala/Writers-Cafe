@@ -60,7 +60,7 @@ function Profile({ isLoggedIn }) {
             {
                 profileData.writtenworks &&
                 <div className="profilePage">
-                    {!isLoggedIn ? <Redirect to="/read" /> : ""}
+                    {!isLoggedIn ? <Redirect to="/login" /> : ""}
                     <div className="header">
                         <div className="section">
                             <div>
