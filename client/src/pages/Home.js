@@ -10,8 +10,8 @@ function Home() {
                 <div className="description">
                     <h1>Get your creative juices flowing by joining Writer’s Cafè.</h1>
                     <div className="buttons">
-                        <div className="button">Start Reading</div>
-                        <div className="button">Sign Up Now</div>
+                        <Link to="/read"><div className="button">Start Reading</div></Link>
+                        <Link to="/register"><div className="button">Sign Up Now</div></Link>
                     </div>
                 </div>
             </section>
