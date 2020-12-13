@@ -94,3 +94,23 @@
         margin-top: calc(var(--formelement-height) / 4);
     }
 }
+
+.home .description{
+    width: 40%;
+    margin: auto;
+    h1{
+        font-size: 1.75rem;
+        font-weight: 400;
+        padding: 1rem;
+    }
+    .buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .button{
+            margin: 1rem;
+            font-size: 1.25rem;
+            padding: 0.5rem 1.5rem;
+        }
+    }
+}

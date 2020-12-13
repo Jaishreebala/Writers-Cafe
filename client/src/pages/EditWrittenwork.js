@@ -68,15 +68,33 @@ function EditWrittenwork({ isLoggedIn }) {
     const { transcript, resetTranscript } = useSpeechRecognition()
     const handle = useFullScreenHandle();
     const speechHandler = () => {
-        console.log(isListening);
         setIsListening(!isListening);
-        console.log(isListening);
         if (!isListening) {
             if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
                 console.log("No support for browser")
             }
             else {
                 SpeechRecognition.startListening({ continuous: true })
+                // const interval = setInterval(function () {
+
+                // }, 5000);
+                // setTimeout(() => {
+
+                // }, 5000);
+                function yourFunction() {
+
+
+                    setTimeout(yourFunction, 5000);
+                }
+
+                const timerForDesc = setTimeout(() => {
+                    console.log("in interval")
+                    textRef.current.value = `${writtenWorkData.content} ${transcript}`;
+                    setWrittenWorkData({ ...writtenWorkData, content: `${writtenWorkData.content} ${transcript}` });
+                    resetTranscript();
+                }, 3000)
+
+                // clearInterval(interval);
 
             }
         }
@@ -84,16 +102,7 @@ function EditWrittenwork({ isLoggedIn }) {
             SpeechRecognition.stopListening();
             SpeechRecognition.abortListening();
         }
-        // console.log(`${writtenWorkData.content} ${transcript}`)
-        // console.log(transcript)
-        // writtenWorkData.content = `${writtenWorkData.content} ${transcript}`;
-        let test = { ...writtenWorkData };
-        test.content = `${writtenWorkData.content} ${transcript}`;
-        console.log(transcript)
-        console.log(`${writtenWorkData.content} ${transcript}`)
-        console.log(test.content);
-        setRerender(!rerender);
-        setWrittenWorkData(test);
+        // resetTranscript();
     }
 
     useEffect(() => {
@@ -125,7 +134,7 @@ function EditWrittenwork({ isLoggedIn }) {
         <> {
             writtenWorkData.author && writtenWorkData.genre && writtenWorkData.comments &&
             <div className="readWrittenWork">
-                {console.log(writtenWorkData)}
+                {console.log(writtenWorkData.content)}
                 {!isLoggedIn ? <Redirect to="/login" /> : ""}
                 <div className="readSection">
                     <div className="heading">
