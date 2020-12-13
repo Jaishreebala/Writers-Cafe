@@ -15,7 +15,8 @@ function EditWrittenwork({ isLoggedIn }) {
     const [query, setQuery] = useState(`/api/v1/writtenWork/${id}`);
     const [writtenWorkData, setWrittenWorkData] = useState([]);
     const [isDescFocus, setIsDescFocus] = useState(false);
-
+    const [isListening, setIsListening] = useState(false);
+    const [rerender, setRerender] = useState(false);
     const [lastText, setLastText] = useState("");
     const [text, setText] = useState("");
     const [lastDescText, setLastDescText] = useState("");
@@ -66,16 +67,38 @@ function EditWrittenwork({ isLoggedIn }) {
     }, [descText])
     const { transcript, resetTranscript } = useSpeechRecognition()
     const handle = useFullScreenHandle();
-    // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    //     console.log("No support for browser")
-    // }
-    // else {
-    //     SpeechRecognition.startListening();
-    //     console.log(transcript)
-    // }
+    const speechHandler = () => {
+        console.log(isListening);
+        setIsListening(!isListening);
+        console.log(isListening);
+        if (!isListening) {
+            if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+                console.log("No support for browser")
+            }
+            else {
+                SpeechRecognition.startListening({ continuous: true })
+
+            }
+        }
+        else {
+            SpeechRecognition.stopListening();
+            SpeechRecognition.abortListening();
+        }
+        // console.log(`${writtenWorkData.content} ${transcript}`)
+        // console.log(transcript)
+        // writtenWorkData.content = `${writtenWorkData.content} ${transcript}`;
+        let test = { ...writtenWorkData };
+        test.content = `${writtenWorkData.content} ${transcript}`;
+        console.log(transcript)
+        console.log(`${writtenWorkData.content} ${transcript}`)
+        console.log(test.content);
+        setRerender(!rerender);
+        setWrittenWorkData(test);
+    }
+
     useEffect(() => {
         loadWrittenWork();
-    }, [query])
+    }, [query, rerender])
     const loadWrittenWork = async () => {
         try {
             const response = await fetch(query)
@@ -102,12 +125,13 @@ function EditWrittenwork({ isLoggedIn }) {
         <> {
             writtenWorkData.author && writtenWorkData.genre && writtenWorkData.comments &&
             <div className="readWrittenWork">
+                {console.log(writtenWorkData)}
                 {!isLoggedIn ? <Redirect to="/login" /> : ""}
                 <div className="readSection">
                     <div className="heading">
                         <h1>{writtenWorkData.name}</h1>
                         <div className="options">
-                            <div className="fullscreen">
+                            <div className="fullscreen" onClick={speechHandler}>
                                 <img src={speech} alt="Speech" /> Start Dictation
                             </div>
                             <div onClick={handle.enter} className="fullscreen">
@@ -145,9 +169,6 @@ function EditWrittenwork({ isLoggedIn }) {
                             <div className="stars">
                                 {starRenderer()}
                             </div></div> : <div className="tagsArea"> <div className="tags view-tag">{writtenWorkData.view}</div> </div>}
-                        {/* <div className="hoverBlendWhiteButton">
-                            Edit Written Work Details
-                    </div> */}
                     </div>
 
                     <div className="comments">
