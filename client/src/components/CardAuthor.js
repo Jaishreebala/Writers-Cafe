@@ -16,7 +16,6 @@ function CardAuthor({ name, id, rerender, setRerender, view, rating, description
             })
             const data = await response.json();
             setRerender(!rerender)
-            console.log(data)
         } catch (err) {
             console.log(err)
         }

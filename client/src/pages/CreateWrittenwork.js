@@ -26,7 +26,6 @@ function CreateWrittenwork({ isLoggedIn }) {
     const submitFormHandler = async (e) => {
         e.preventDefault();
         let genreArray = genre.current.value.split(',');
-        console.log(view)
         try {
             const response = await fetch("/api/v1/writtenWork", {
                 method: "POST",
@@ -45,7 +44,6 @@ function CreateWrittenwork({ isLoggedIn }) {
                 }
             })
             const data = await response.json();
-            console.log(data)
             if (data.success) {
                 setErrors("");
                 history.replace(`/editwrittenwork/${data.data._id}`)
@@ -149,7 +147,7 @@ function CreateWrittenwork({ isLoggedIn }) {
                     <div class="checkbox-container">
                         <label class="container">18 +
                             <input type="checkbox" name="nsfw" value="nsfw" ref={nsfw} />
-                            <span class="checkmark" onClick={() => { console.log(nsfw.current.checked) }}></span>
+                            <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="checkbox-container">

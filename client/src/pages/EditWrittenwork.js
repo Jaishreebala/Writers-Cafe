@@ -80,14 +80,11 @@ function EditWrittenwork({ isLoggedIn }) {
         try {
             const response = await fetch(query)
             const data = await response.json();
-            console.log(data)
             setWrittenWorkData(data.data);
 
         } catch (err) {
             console.log(err)
         }
-        console.log("writtenWorkData")
-        console.log(writtenWorkData)
     }
     const starRenderer = () => {
         let ratingRenderer = [];
@@ -140,7 +137,7 @@ function EditWrittenwork({ isLoggedIn }) {
                                 {writtenWorkData.description}
                             </textarea> */}
                             <div
-                                contentEditable className={`descArea ${isDescFocus ? 'editting' : ''}`} ref={descRef} onInput={(e) => { console.log(descRef.current.textContent); setDescText(descRef.current.textContent) }} onBlur={() => { setIsDescFocus(false) }} onFocus={() => { setIsDescFocus(true) }}>
+                                contentEditable className={`descArea ${isDescFocus ? 'editting' : ''}`} ref={descRef} onInput={(e) => { setDescText(descRef.current.textContent) }} onBlur={() => { setIsDescFocus(false) }} onFocus={() => { setIsDescFocus(true) }}>
                                 {writtenWorkData.description}
                             </div>
                         </p>

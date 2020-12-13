@@ -21,11 +21,9 @@ function Resetpassword({ isLoggedIn, setIsLoggedIn }) {
                 }
             })
             const data = await response.json();
-            console.log(data.success)
             if (data.success) {
                 setErrors("");
                 setIsLoggedIn(true);
-                console.log("Logging in...")
             }
             else {
                 setIsLoggedIn(false);
@@ -36,7 +34,6 @@ function Resetpassword({ isLoggedIn, setIsLoggedIn }) {
         }
 
     }
-    console.log(resettoken)
     return (
         <div className="login">
             {isLoggedIn ? <Redirect to="/profile" /> : ""}

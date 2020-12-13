@@ -50,7 +50,6 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
                 }
             })
             const data = await response.json();
-            console.log(data.success)
             if (data.success) {
                 setMessage("A reset password link has been successfully sent to your email account.");
                 setErrors("")
@@ -59,7 +58,6 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
                 setMessage("")
                 setErrors(data.error);
             }
-            console.log(errors)
         } catch (err) {
             console.log(err)
         }

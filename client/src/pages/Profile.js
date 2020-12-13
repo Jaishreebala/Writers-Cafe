@@ -23,7 +23,6 @@ function Profile({ isLoggedIn }) {
         try {
             const response = await fetch("api/v1/auth/me")
             const data = await response.json();
-            // console.log(data)
             setProfileData(data.data);
             if (data.data.location) {
                 setProfileLocation(data.data.location)
@@ -32,7 +31,6 @@ function Profile({ isLoggedIn }) {
         } catch (err) {
             console.log(err)
         }
-        // console.log(profileData.writtenworks)
     }
     const addAddressHandler = async () => {
         try {
@@ -46,7 +44,6 @@ function Profile({ isLoggedIn }) {
                 }
             })
             const data = await response.json();
-            // console.log(data);
             if (data.data.location) {
                 setProfileLocation(data.data.location)
             }
@@ -68,7 +65,6 @@ function Profile({ isLoggedIn }) {
                             </div>
                             <div>
                                 <h1>{profileData.firstName} {profileData.lastName}</h1>
-                                {console.log(profileLocation)}
                                 <div className="hoverBlendWhiteButton">{profileLocation.formattedAddress ?
                                     <div> {profileLocation.formattedAddress}</div> :
                                     addressFields ?
