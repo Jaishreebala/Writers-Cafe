@@ -69,33 +69,17 @@ function EditWrittenwork({ isLoggedIn }) {
     const handle = useFullScreenHandle();
     const speechHandler = () => {
         setIsListening(!isListening);
-        if (!isListening) {
+
+        if (isListening) {
             if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
                 console.log("No support for browser")
             }
             else {
                 SpeechRecognition.startListening({ continuous: true })
-                // const interval = setInterval(function () {
-
-                // }, 5000);
-                // setTimeout(() => {
-
-                // }, 5000);
-                function yourFunction() {
-
-
-                    setTimeout(yourFunction, 5000);
-                }
-
-                const timerForDesc = setTimeout(() => {
-                    console.log("in interval")
-                    textRef.current.value = `${writtenWorkData.content} ${transcript}`;
-                    setWrittenWorkData({ ...writtenWorkData, content: `${writtenWorkData.content} ${transcript}` });
-                    resetTranscript();
-                }, 3000)
-
-                // clearInterval(interval);
-
+                textRef.current.value = `${writtenWorkData.content} ${transcript}`;
+                setWrittenWorkData({ ...writtenWorkData, content: `${writtenWorkData.content} ${transcript}` });
+                setText(`${writtenWorkData.content} ${transcript}`);
+                resetTranscript();
             }
         }
         else {
@@ -134,7 +118,7 @@ function EditWrittenwork({ isLoggedIn }) {
         <> {
             writtenWorkData.author && writtenWorkData.genre && writtenWorkData.comments &&
             <div className="readWrittenWork">
-                {console.log(writtenWorkData.content)}
+                {/* {console.log(writtenWorkData.content)} */}
                 {!isLoggedIn ? <Redirect to="/login" /> : ""}
                 <div className="readSection">
                     <div className="heading">
