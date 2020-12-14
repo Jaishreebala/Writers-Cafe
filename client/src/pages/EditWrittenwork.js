@@ -67,27 +67,34 @@ function EditWrittenwork({ isLoggedIn }) {
     }, [descText])
     const { transcript, resetTranscript } = useSpeechRecognition()
     const handle = useFullScreenHandle();
+    // function logger() {
+    //     console.log("timer")
+    //     setTimeout(logger, 1000);
+    // }
     const speechHandler = () => {
+        // window.setInterval(function () {
+        //     console.log("timer")
+        // }, 5000);
         setIsListening(!isListening);
-
+        // resetTranscript(); /
         if (isListening) {
             if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
                 console.log("No support for browser")
             }
             else {
                 SpeechRecognition.startListening({ continuous: true })
-                textRef.current.value = `${writtenWorkData.content} ${transcript}`;
-                setWrittenWorkData({ ...writtenWorkData, content: `${writtenWorkData.content} ${transcript}` });
-                setText(`${writtenWorkData.content} ${transcript}`);
-                resetTranscript();
             }
         }
         else {
             SpeechRecognition.stopListening();
-            SpeechRecognition.abortListening();
+            // SpeechRecognition.abortListening();
+            textRef.current.value = `${writtenWorkData.content} ${transcript}`;
+            setWrittenWorkData({ ...writtenWorkData, content: `${writtenWorkData.content} ${transcript}` });
+            setText(`${writtenWorkData.content} ${transcript}`);
+            resetTranscript();
         }
-        // resetTranscript();
     }
+
 
     useEffect(() => {
         loadWrittenWork();
@@ -124,7 +131,7 @@ function EditWrittenwork({ isLoggedIn }) {
                     <div className="heading">
                         <h1>{writtenWorkData.name}</h1>
                         <div className="options">
-                            <div className="fullscreen" onClick={speechHandler}>
+                            <div className="fullscreen" onClick={() => { speechHandler(); if (isListening) { resetTranscript(); } }}>
                                 <img src={speech} alt="Speech" /> Start Dictation
                             </div>
                             <div onClick={handle.enter} className="fullscreen">
