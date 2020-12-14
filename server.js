@@ -35,7 +35,7 @@ app.use('/api/v1/users', users);
 // Call error handler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const server = app.listen(PORT, console.log(`Server up and running on port ${PORT}`.blue.bold));
 
 process.on("unhandledRejection", (err, response) => {
