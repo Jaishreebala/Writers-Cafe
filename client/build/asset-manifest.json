@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.beac506c.chunk.css",
+    "main.js": "/static/js/main.e6869221.chunk.js",
+    "main.js.map": "/static/js/main.e6869221.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e1ca0937.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e1ca0937.js.map",
+    "static/js/2.771857d5.chunk.js": "/static/js/2.771857d5.chunk.js",
+    "static/js/2.771857d5.chunk.js.map": "/static/js/2.771857d5.chunk.js.map",
+    "static/js/3.8650755c.chunk.js": "/static/js/3.8650755c.chunk.js",
+    "static/js/3.8650755c.chunk.js.map": "/static/js/3.8650755c.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.beac506c.chunk.css.map": "/static/css/main.beac506c.chunk.css.map",
+    "static/js/2.771857d5.chunk.js.LICENSE.txt": "/static/js/2.771857d5.chunk.js.LICENSE.txt",
+    "static/media/about.8c851905.svg": "/static/media/about.8c851905.svg",
+    "static/media/arrow.38ea6e53.svg": "/static/media/arrow.38ea6e53.svg",
+    "static/media/cross.69bd5189.svg": "/static/media/cross.69bd5189.svg",
+    "static/media/delete.17e5942c.svg": "/static/media/delete.17e5942c.svg",
+    "static/media/edit.57a321a0.svg": "/static/media/edit.57a321a0.svg",
+    "static/media/empty_star.a393f159.svg": "/static/media/empty_star.a393f159.svg",
+    "static/media/expand.f2c9b9ae.svg": "/static/media/expand.f2c9b9ae.svg",
+    "static/media/filled_star.4350e984.svg": "/static/media/filled_star.4350e984.svg",
+    "static/media/logoLightBg.c9764a49.svg": "/static/media/logoLightBg.c9764a49.svg",
+    "static/media/logoNoBg.08379a9e.svg": "/static/media/logoNoBg.08379a9e.svg",
+    "static/media/placeholder-story.svg.c6977112.svg": "/static/media/placeholder-story.svg.c6977112.svg",
+    "static/media/placeholder_writtenwork.c6977112.svg": "/static/media/placeholder_writtenwork.c6977112.svg",
+    "static/media/plus.404c0203.svg": "/static/media/plus.404c0203.svg",
+    "static/media/profilePlaceholder.c946e319.svg": "/static/media/profilePlaceholder.c946e319.svg",
+    "static/media/speech.852f4052.svg": "/static/media/speech.852f4052.svg",
+    "static/media/app.scss": "/static/media/whitebg.39435842.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e1ca0937.js",
+    "static/js/2.771857d5.chunk.js",
+    "static/css/main.beac506c.chunk.css",
+    "static/js/main.e6869221.chunk.js"
+  ]
+}
