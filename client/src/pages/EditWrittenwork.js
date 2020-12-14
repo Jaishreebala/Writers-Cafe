@@ -21,6 +21,7 @@ function EditWrittenwork({ isLoggedIn }) {
     const [text, setText] = useState("");
     const [lastDescText, setLastDescText] = useState("");
     const [descText, setDescText] = useState("");
+    const [isVRSupported, setIsVRSupported] = useState(true);
     const textRef = useRef();
     const descRef = useRef();
     useEffect(() => {
@@ -67,23 +68,20 @@ function EditWrittenwork({ isLoggedIn }) {
     }, [descText])
     const { transcript, resetTranscript } = useSpeechRecognition()
     const handle = useFullScreenHandle();
-    // function logger() {
-    //     console.log("timer")
-    //     setTimeout(logger, 1000);
-    // }
     const speechHandler = () => {
-        // window.setInterval(function () {
-        //     console.log("timer")
-        // }, 5000);
+
+        if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+            console.log("No support for browser")
+            setIsVRSupported(false);
+            setTimeout(
+                () => {
+                    setIsVRSupported(true);
+                }, 4000);
+            console.log("no support")
+        }
         setIsListening(!isListening);
-        // resetTranscript(); /
         if (isListening) {
-            if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-                console.log("No support for browser")
-            }
-            else {
-                SpeechRecognition.startListening({ continuous: true })
-            }
+            SpeechRecognition.startListening({ continuous: true })
         }
         else {
             SpeechRecognition.stopListening();
@@ -197,6 +195,10 @@ function EditWrittenwork({ isLoggedIn }) {
                         </div>
                     </div>
 
+                </div>
+                <div className={`no-support ${isVRSupported ? "" : ' showBlock showOpacity'}`}>
+                    <div>Your browser doesn’t support voice recognition software</div>
+                    <div>Note: Chrome has the best support for the voice recognition software.</div>
                 </div>
             </div>}</>
     )
