@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 }
-
+console.log(path.join(__dirname, 'client/build'))
 const server = app.listen(PORT, console.log(`Server up and running on port ${PORT}`.blue.bold));
 
 process.on("unhandledRejection", (err, response) => {
