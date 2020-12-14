@@ -12,8 +12,8 @@ const app = express();
 // Body Parser
 app.use(express.json());
 // set static folder
-console.log(path.join(__dirname, 'db/public'))
-app.use(express.static(path.join(__dirname, 'db/public')));
+// console.log(path.join(__dirname, 'db/public'))
+// app.use(express.static(path.join(__dirname, 'db/public')));
 // Use cookie parser
 app.use(cookieparser());
 // Connect To Database
