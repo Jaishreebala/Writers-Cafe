@@ -8,7 +8,7 @@
     text-align: center;
     color: #fff;
     img{
-        height: 100vh;
+        height: calc(100vh - 100px);
         width: 50%;
     }
     form{
@@ -219,13 +219,17 @@
 
 @media screen and(max-width: 1000px){
     .login{
-        .main{
+        // .main{
+            align-items: center;
+            justify-content: center;
             img{
                 width: 50%;
                 opacity: 0.3;
                 left: 50%;
                 transform: translateX(-50%);
                 position: absolute;
+                z-index: 0;
+                pointer-events: none;
             }
             .description{
                 position: absolute;
@@ -233,8 +237,18 @@
                 width: 60%;
                 left: 50%;
                 transform: translateX(-50%);
+                z-index: 2;
             }
-        }
+            form{
+                width: 80%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem 0;
+                z-index: 2;
+            }
+        // }
     }
 }
 @media screen and(max-width: 800px){
