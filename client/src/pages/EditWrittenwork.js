@@ -22,6 +22,8 @@ function EditWrittenwork({ isLoggedIn }) {
     const [lastDescText, setLastDescText] = useState("");
     const [descText, setDescText] = useState("");
     const [isVRSupported, setIsVRSupported] = useState(true);
+    const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+
     const textRef = useRef();
     const descRef = useRef();
     useEffect(() => {
@@ -125,7 +127,7 @@ function EditWrittenwork({ isLoggedIn }) {
             <div className="readWrittenWork">
                 {/* {console.log(writtenWorkData.content)} */}
                 {!isLoggedIn ? <Redirect to="/login" /> : ""}
-                <div className="readSection">
+                <div className={`readSection ${isDescriptionOpen ? "marginRight" : ""}`}>
                     <div className="heading">
                         <h1>{writtenWorkData.name}</h1>
                         <div className="options">
@@ -135,8 +137,8 @@ function EditWrittenwork({ isLoggedIn }) {
                             <div onClick={handle.enter} className="fullscreen">
                                 <img src={expand} alt="Expand" /> Fullscreen
                             </div>
-                            <div className="fullscreen">
-                                <img src={about} alt="About" /> About
+                            <div onClick={() => { setIsDescriptionOpen(!isDescriptionOpen); console.log(isDescriptionOpen) }} className={`fullscreen ${isDescriptionOpen ? 'selectedState' : ""}`}>
+                                <img src={about} alt="expand" /> About
                             </div>
                         </div>
                     </div>
@@ -146,7 +148,7 @@ function EditWrittenwork({ isLoggedIn }) {
                         </textarea>
                     </FullScreen>
                 </div>
-                <div className="description">
+                <div className={`description ${isDescriptionOpen ? "slideIn" : ""}`}>
                     <div className="padding">
                         <h1>{writtenWorkData.name}</h1>
                         <h2>{writtenWorkData.author.firstName} {writtenWorkData.author.lastName}</h2>

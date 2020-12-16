@@ -5,6 +5,7 @@
     width: 80%;
     margin: auto;
     position: relative;
+    transition: all 0.75s;
     .options{
         display: flex;
         align-items: center;
@@ -24,7 +25,7 @@
         }
     }
     .readSection{
-        margin-right: 350px;
+        // margin-right: 350px;
     
         .heading{
             display: flex;
@@ -71,11 +72,13 @@
     }
     .description{
         position: absolute;
+        transform: translateX(100%);
         top: 0;
         right: 0;
         background: linear-gradient(163.98deg, #7F66C4 -14.44%, #00AFE7 140.68%);
         width: 350px;
         height: 100%;
+        transition: all 0.5s!important;
         overflow: scroll;
         h1{
             color: #fff;
@@ -143,3 +146,13 @@
     width: 100%!important;
     overflow: scroll;
   }
+.selectedState{
+    background-color: #E4DBFF!important;
+}
+
+.marginRight{
+    margin-right: 350px;
+}
+.slideIn{
+    transform: translateX(0%)!important;
+}

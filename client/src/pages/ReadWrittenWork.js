@@ -18,6 +18,7 @@ function ReadWrittenWork({ isLoggedIn }) {
     const [query, setQuery] = useState(`/api/v1/writtenWork/${id}`);
     const [userRating, setUserRating] = useState([0, 0, 0, 0, 0]);
     const [errors, setErrors] = useState("");
+    const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
     const handle = useFullScreenHandle();
     useEffect(() => {
@@ -119,14 +120,14 @@ function ReadWrittenWork({ isLoggedIn }) {
         <>
             {
                 writtenWorkData.author && writtenWorkData.genre && writtenWorkData.comments && < div className="readWrittenWork">
-                    <div className="readSection">
+                    <div className={`readSection ${isDescriptionOpen ? "marginRight" : ""}`}>
                         <div className="heading">
                             <h1>{writtenWorkData.name}</h1>
                             <div className="options">
                                 <div onClick={handle.enter} className="fullscreen">
                                     <img src={expand} alt="expand" /> Fullscreen
                                 </div>
-                                <div onClick={handle.enter} className="fullscreen">
+                                <div onClick={() => { setIsDescriptionOpen(!isDescriptionOpen); console.log(isDescriptionOpen) }} className={`fullscreen ${isDescriptionOpen ? 'selectedState' : ""}`}>
                                     <img src={about} alt="expand" /> About
                                 </div>
                             </div>
@@ -137,7 +138,7 @@ function ReadWrittenWork({ isLoggedIn }) {
                             </textarea>
                         </FullScreen>
                     </div>
-                    <div className="description">
+                    <div className={`description ${isDescriptionOpen ? "slideIn" : ""}`}>
                         <div className="padding">
                             <h1>{writtenWorkData.name}</h1>
                             <h2>{writtenWorkData.author.firstName} {writtenWorkData.author.lastName}</h2>
