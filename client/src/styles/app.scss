@@ -170,6 +170,30 @@ a{
 .button{
     cursor: pointer;
 }
+@media screen and(max-width: 800px){
+    *{
+        font-size: 101%!important;
+    }
+    .nav{
+        width: 95%!important;
+    }
+
+}
+@media screen and(max-width: 600px){
+    .nav{
+        flex-direction: column;
+        #logo{
+            img{
+                height: 4rem;
+            }
+        }
+    }
+    .feature-circle{
+        height: 13rem!important;
+        width: 13rem!important;
+    }
+   
+}
 @import "./login";
 @import "./nav";
 @import "./card";

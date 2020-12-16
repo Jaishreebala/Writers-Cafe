@@ -20,7 +20,6 @@ const advancedResults = (model, populate, populateAgain, protectPrivate) => asyn
         queryStr.view = 'public';
     }
 
-    console.log(queryStr)
     // public
     query = model.find(queryStr)
     if (populate) {

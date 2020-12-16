@@ -64,7 +64,7 @@
     .searchInput input:focus + .label-name .content-name,
     .searchInput input:valid + .label-name .content-name {
         transform: translateY(-120%);
-        font-size: 14px;
+        font-size: 0.75rem;
         left: 0px;
         color: var(--keyColor);
     }
@@ -126,47 +126,36 @@
     }
     .features{
         background-image: url('../images/whitebg.svg');
-        height: 115vh;
+        min-height: 115vh;
         width: 100vw;
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
     }
-    .pills{
+    .pills-bg{
+        background-image: url('../images/pills.svg');
         position: absolute;
-        width: 340px;
-        height: 86px;
         top: 50%;
         left: 50%;
-        border-radius: 60px;
-        background: linear-gradient(266.62deg, rgba(127, 102, 196, 0.35) 4.44%, rgba(0, 175, 231, 0.35) 95.46%);
-    }
-    .small{
-        width: 340px;
-        transform: translate(-70%, -150%) rotateZ(-30deg);
-    }
-    .medium{
-        width: 500px;
-        transform: translate(-50%, -70%) rotateZ(-30deg);
-    }
-    .large{
-        width: 600px;
-        transform: translate(-40%, 30%) rotateZ(-30deg);
-    }
-    .medium:nth-child(2){
-        transform: translate(-30%, 140%) rotateZ(-30deg);
-    }
-    .small:nth-child(1){
-        transform: translate(-10%, 245%) rotateZ(-30deg);
+        transform: translate(-50%, -40%);
+        z-index: 1;
+        height: 70%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 100%;
+
     }
     .features-area{
         position: absolute;
         top: 15vh;
-        height: calc(100% - 15vh);
+        min-height: calc(100% - 15vh);
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-around;
+        background-color: white!important;
         h1{
             // color: #7F66C5;
             font-size: 2rem;
@@ -181,13 +170,16 @@
             -moz-text-fill-color: transparent;
         }
         .feature-content{
-            height: calc(100% - 15vh);
+            // min-height: calc(100vh - 15vh);
+            height: 100%;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
             flex-wrap: wrap;
+            z-index: 2;
             .feature-circle{
+                
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -196,6 +188,7 @@
                 font-size: 1.5rem;
                 height: 20rem;
                 width: 20rem;
+                margin: 0.5rem;
                 border-radius: 50%;
                 background: linear-gradient(180deg, #E4DBFF 0%, #9CE7FF 100%);
                 box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
@@ -208,6 +201,7 @@
 
         }
         .buttons{
+            z-index: 2;
             display: flex;
             .button{
                 background: linear-gradient(93.07deg, #7F66C4 0.8%, #398ED7 55.47%, #00AFE7 100%);
@@ -221,4 +215,44 @@
         }
     }
 
+}
+
+@media screen and(max-width: 1000px){
+    .login{
+        .main{
+            img{
+                width: 50%;
+                opacity: 0.3;
+                left: 50%;
+                transform: translateX(-50%);
+                position: absolute;
+            }
+            .description{
+                position: absolute;
+                left: 0;
+                width: 60%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+@media screen and(max-width: 800px){
+    .login{
+        font-size: 50%;
+        // overflow: hidden;
+        width: 100%;
+    }
+    .button{
+        font-size: 1rem!important;
+    }
+}
+@media screen and(max-width: 400px){
+    *{
+        font-size: 94%!important;
+    }
+    .button{
+        font-size: 0.75rem!important;
+        padding: 0.25rem!important;
+    }
 }

@@ -16,11 +16,7 @@ function Home() {
                 </div>
             </section>
             <section className="features">
-                <div className="pills small"></div>
-                <div className="pills medium"></div>
-                <div className="pills large"></div>
-                <div className="pills medium"></div>
-                <div className="pills small"></div>
+                <div className="pills-bg"></div>
                 <div className="features-area">
                     <h1>Features</h1>
                     <div className="feature-content">
