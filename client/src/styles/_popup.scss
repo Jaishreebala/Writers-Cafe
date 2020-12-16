@@ -1,23 +1,83 @@
 .popup-bg{
     height: 100vh;
     width: 100vw;
-    position: absolute;
+    position: fixed;
+    z-index: 1000;
+    display: none;
     .popup{
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        height: 200px;
-        width: 350px;
+        width: 900px;
+        height: 500px;
         background-color: #fff;
-        z-index: 1;
+        z-index: 10000;
         border-radius: 1rem;
         box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
-        text-align: center;
+        text-align: left;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        // align-items: center;
+        justify-content: space-between;
         flex-direction: column;
         font-size: 1.25rem;
+        .popup-header{
+            background-color: #E4DBFF;
+            border-radius: 1rem 1rem 0px 0px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            font-weight: 300;
+            font-size: 1.75rem;
+            position: sticky;
+            top: 0;
+        }
+        .popup-body{
+            // padding: 1rem;
+            height: calc(500px - 100px - 60px);
+            overflow: scroll;
+
+            input{
+                border: solid 1px #ccc;
+                border-radius: 0.5rem;
+            }
+            p{
+                padding: 1rem;
+            }
+            .nearbyaddress{
+                background: linear-gradient(90.36deg, #E4DBFF -1.59%, #9CE7FF 104.19%);
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+                height: 80px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 2rem ;
+            }
+        }
+        .popup-footer{
+            // height: 100px;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            bottom: 0;
+            background-color: #fff;
+            border-radius: 0px 0px 1rem 1rem;
+            div{
+                padding: 0.5rem 1rem;
+                border-radius: 0.25rem;
+                margin: 1rem;
+                cursor: pointer;
+            }
+            .cancel{
+                border: solid #7F66C4 1px;
+                color: #7F66C4;
+            }
+            .find{
+                background-color: #7F66C4;
+                color: #fff;
+            }
+        }
     }
 }
+

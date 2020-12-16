@@ -11,7 +11,9 @@ function Profile({ isLoggedIn }) {
     const [addressFields, setAddressFields] = useState(false);
     const [profileLocation, setProfileLocation] = useState({});
     const [rerender, setRerender] = useState(false);
-
+    const [showAddressPopup, setShowAddressPopup] = useState(false);
+    const [nearbyAuthors, setNearbyAuthors] = useState();
+    const miles = useRef();
     let addressLine = "";
     let addressCountry = "";
     let addressCity = "";
@@ -51,6 +53,20 @@ function Profile({ isLoggedIn }) {
             console.log(err)
         }
     }
+    const findAuthorsNearbyHandler = async () => {
+        if (miles.current.value) {
+            console.log(profileLocation.zipcode.trim())
+            try {
+                const response = await fetch(`api/v1/users/radius/${profileLocation.zipcode}/${miles.current.value}`)
+                const data = await response.json();
+                setNearbyAuthors(data.data);
+                console.log(data);
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
     return (
 
         <>
@@ -58,6 +74,23 @@ function Profile({ isLoggedIn }) {
                 profileData.writtenworks &&
                 <div className="profilePage">
                     {!isLoggedIn ? <Redirect to="/login" /> : ""}
+                    <div className={`popup-bg ${showAddressPopup ? 'showBlock' : ""}`}>
+                        <div className="popup-address popup">
+                            <div className="popup-header">
+                                {console.log(nearbyAuthors)}
+                                Find Authors Near Me
+                            </div>
+                            <div className="popup-body">
+                                <p>Your address: {profileLocation.formattedAddress} </p>
+                                <p>Find authors within radius (in miles): <input ref={miles} type="number" min="0" step="0.01" onChange={() => miles.current.value ? console.log(miles.current.value) : console.log(miles)} /></p>
+                                {nearbyAuthors ? nearbyAuthors.users.map(user => { return <div className="nearbyaddress"><span> {user.firstName} {user.lastName}: </span> <span>{user.location.formattedAddress}</span></div> }) : console.log("noe")}
+                            </div>
+                            <div className="popup-footer">
+                                <div className="cancel" onClick={() => { setShowAddressPopup(false); setNearbyAuthors() }}>Cancel</div>
+                                <div className="find" onClick={findAuthorsNearbyHandler}>Find</div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="header">
                         <div className="section">
                             <div>
@@ -80,7 +113,7 @@ function Profile({ isLoggedIn }) {
                             </div>
                         </div>
                         <div className="section">
-                            {/* <div className="button">Find Authors Near Me</div> */}
+                            <div className="button" onClick={() => { setShowAddressPopup(true) }}>Find Authors Near Me</div>
                             <Link to="/createWrittenWork"><div className="button">+ New Written Work</div></Link>
                         </div>
                     </div>

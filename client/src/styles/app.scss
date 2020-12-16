@@ -167,6 +167,9 @@ a{
         padding: 1rem;
     }
 }
+.button{
+    cursor: pointer;
+}
 @import "./login";
 @import "./nav";
 @import "./card";
