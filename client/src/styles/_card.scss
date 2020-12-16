@@ -1,9 +1,9 @@
 .cardsSection{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    width: 85%;
+    width: 100%;
     margin: auto;
     .cardLink{
         width: 45%;
@@ -11,13 +11,14 @@
         min-height: 10rem;
         border-radius: 1rem;
         padding: 0.5rem 1rem;
-        margin: 1rem 0;
+        margin: 1rem;
         background-color: #fff;
         box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
         transition: 0.5s;
         display: flex; 
         align-items: center;
         position: relative;
+        font-size: 95%;
         cursor: pointer;
         &:hover{
             background-color: #E4DBFF;
@@ -119,4 +120,5 @@
     }
 
 }
+
 

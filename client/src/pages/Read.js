@@ -84,7 +84,7 @@ function Read({ isLoggedIn }) {
         }
     }
     return (
-        <div>
+        <div className="read-main-div">
             <div className="header">
                 <div className="section">
                     <div className="tagsArea">
