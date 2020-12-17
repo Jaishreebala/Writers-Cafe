@@ -177,14 +177,15 @@ a{
 
 // }
 @media screen and(max-width: 800px){
-    *{
-        font-size: 101%!important;
-    }
+
     .nav{
         width: 95%!important;
     }
     .cardLink{
         font-size: 90%!important;
+    }
+    .profilePage .header .section:nth-child(1) h1{
+        font-size: 1.5rem!important;
     }
 
 }
@@ -208,7 +209,7 @@ a{
         height: 13rem!important;
         width: 13rem!important;
     }
-    .read-main-div{
+    .read-main-div, .profilePage{
         margin-top: 3rem;
         font-size: 70%!important;
     }
@@ -226,6 +227,18 @@ a{
             height: 4rem!important;
             width: 4rem!important;
         }
+        .cardText{
+            img{
+                height: 1rem!important;
+                width: 1rem!important;
+            }
+        }
+        .cardOverlay{
+            img{
+                height: 2rem!important;
+                width: 2rem!important;
+            }
+        }
     }
     .tags, .warning-tag{
         border-radius: 2px;
@@ -236,6 +249,21 @@ a{
     }
     .dropdown img, .tags img{
         width: 0.5rem!important;
+    }
+    .dropdown .options{
+        width: 150px!important;
+        font-size: 0.75rem!important;
+    }
+    .profilePage .header .section:nth-child(1) h1{
+        font-size: 1rem!important;
+    }
+    .profilePage .header .section:nth-child(2) div{
+        font-size: 0.35rem !important;
+        padding: 0.1rem !important;
+    }
+    .profilePage .header img{
+        height: 3rem;
+        width: 3rem;
     }
 }
 @import "./login";
