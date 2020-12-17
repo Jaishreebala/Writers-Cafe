@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    --formelement-height: 70px;
+    --formelement-height: 50px;
     --keyColor: #7F66C5;
     .searchInput{
         color: #ccc;
@@ -135,7 +135,7 @@
         padding-left: 35px;
         margin-bottom: 12px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 1.25rem;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -165,7 +165,7 @@
         padding-left: 35px;
         margin-bottom: 12px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 1.25rem;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;

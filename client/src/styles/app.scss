@@ -187,6 +187,9 @@ a{
     .popup-body{
         height: calc(100vh - 100px - 60px)!important;
     }
+    .createPage{
+        font-size: 90%!important;
+    }
 }
 @media screen and(max-width: 800px){
 
@@ -198,6 +201,15 @@ a{
     }
     .profilePage .header .section:nth-child(1) h1{
         font-size: 1.5rem!important;
+    }
+    .createPage{
+        font-size: 70%!important;
+        .container{
+            font-size: 1rem!important;
+        }
+        .radio{
+            font-size: 1rem!important;
+        }
     }
 
 }
@@ -225,7 +237,23 @@ a{
         margin-top: 3rem;
         font-size: 70%!important;
     }
-    
+    .createPage{
+        margin-top: 3rem!important;
+        .whitebg{
+            flex-direction: column!important;
+            height: 100%!important;
+            padding: 1rem!important;
+            border-radius: 0.5rem!important;
+            .divider{
+                width: 100%!important;
+                padding: 0rem!important;
+                border: none!important;
+            }
+        }
+        .textarea{
+            height: 150px!important;
+        }
+    }
    
 }
 @media screen and(max-width: 500px){
