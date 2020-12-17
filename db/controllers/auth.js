@@ -123,7 +123,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
-    const resetURL = `http://localhost:3000/resetpassword/${resetToken}`;
+    const resetURL = `https://writers-cafe.herokuapp.com/resetpassword/${resetToken}`;
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Below is the link for resetting the password to your Writer's Cafe account. \n\n${resetURL}`;
 
     try {
