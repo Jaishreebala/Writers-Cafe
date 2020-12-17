@@ -127,7 +127,7 @@ function ReadWrittenWork({ isLoggedIn }) {
                                 <div onClick={handle.enter} className="fullscreen">
                                     <img src={expand} alt="expand" /> Fullscreen
                                 </div>
-                                <div onClick={() => { setIsDescriptionOpen(!isDescriptionOpen); console.log(isDescriptionOpen) }} className={`fullscreen ${isDescriptionOpen ? 'selectedState' : ""}`}>
+                                <div onClick={() => { setIsDescriptionOpen(!isDescriptionOpen); console.log(isDescriptionOpen) }} className={`fullscreen about ${isDescriptionOpen ? 'selectedState' : ""}`}>
                                     <img src={about} alt="expand" /> About
                                 </div>
                             </div>

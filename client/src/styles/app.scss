@@ -190,6 +190,16 @@ a{
     .createPage{
         font-size: 90%!important;
     }
+    .readWrittenWork{
+        margin-top: 1rem!important;
+        width: 100%!important;
+        .about{
+            z-index: 1000;
+        }
+        .description{
+            width: 100%!important;
+        }
+    }
 }
 @media screen and(max-width: 800px){
 
