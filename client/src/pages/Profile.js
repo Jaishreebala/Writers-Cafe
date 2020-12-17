@@ -72,7 +72,7 @@ function Profile({ isLoggedIn }) {
         <>
             {
                 profileData.writtenworks &&
-                <div className="profilePage">
+                <div className={`profilePage ${showAddressPopup ? "freezePage" : ""}`}>
                     {!isLoggedIn ? <Redirect to="/login" /> : ""}
                     <div className={`popup-bg ${showAddressPopup ? 'showBlock' : ""}`}>
                         <div className="popup-address popup">

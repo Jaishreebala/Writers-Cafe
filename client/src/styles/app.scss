@@ -173,9 +173,21 @@ a{
 .button{
     cursor: pointer;
 }
-// @media screen and(max-width: 1130px){
-
-// }
+.freezePage{
+    overflow: hidden;
+}
+@media screen and(max-width: 950px){
+    .popup{
+        height: 80vh!important ;
+        width: 100vw!important;
+        position: fixed;
+        top: 34%!important;
+        border-radius: 0rem!important;
+    }
+    .popup-body{
+        height: calc(100vh - 100px - 60px)!important;
+    }
+}
 @media screen and(max-width: 800px){
 
     .nav{
