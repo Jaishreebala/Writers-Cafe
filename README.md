@@ -24,15 +24,15 @@ Writer's cafe is a MERN stack web application where users can read other people'
 ---
 ### Developer Usage
 1. Clone this project from github.
-2. Run this code in the project terminal to install all the dependencies:
+2. Run this command in the project terminal to install all the dependencies:
     ``` 
     npm install
     ```
-3. Start the backend server by running the following code in the project terminal.
+3. Start the backend server by running the following command in the project terminal.
     ```
     npm run dev
     ``` 
-4. Navigate to the client folder bt running `cd client` in the project terminal. Run the following code:
+4. Navigate to the client folder by running `cd client` in the project terminal. Run the following command:
     ```
     npm start
     ``` 
